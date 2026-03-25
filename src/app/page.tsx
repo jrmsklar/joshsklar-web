@@ -149,7 +149,7 @@ function About() {
   return (
     <section id="about" className="py-28 md:py-36">
       <FadeUp>
-        <div className="max-w-[65ch] mx-auto px-6">
+        <div className="max-w-3xl mx-auto px-6">
           <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-8">
             About
           </p>
