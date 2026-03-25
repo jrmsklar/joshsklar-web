@@ -361,16 +361,16 @@ function Testimonials() {
           </p>
         </motion.div>
         <div className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
-          <TestimonialsColumn testimonials={firstColumn} duration={15} />
+          <TestimonialsColumn testimonials={firstColumn} duration={30} />
           <TestimonialsColumn
             testimonials={secondColumn}
             className="hidden md:block"
-            duration={19}
+            duration={38}
           />
           <TestimonialsColumn
             testimonials={thirdColumn}
             className="hidden lg:block"
-            duration={17}
+            duration={34}
           />
         </div>
       </div>
