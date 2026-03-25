@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useEffect, useRef, useCallback } from "react";
 import { motion } from "motion/react";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
+import { NavBar } from "@/components/ui/tube-light-navbar";
+import { Home as HomeIcon, User, Briefcase, PenLine, Mail } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
 /*  Intersection Observer hook for fade-up                            */
@@ -46,42 +48,15 @@ function FadeUp({
 }
 
 /* ------------------------------------------------------------------ */
-/*  Nav                                                               */
+/*  Nav items for tube light navbar                                    */
 /* ------------------------------------------------------------------ */
-function Nav() {
-  const scrollTo = useCallback((id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  }, []);
-
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#FAFAF8]/80 border-b border-[--color-divider]">
-      <div className="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
-        <button
-          onClick={() => scrollTo("hero")}
-          className="text-sm font-semibold tracking-tight text-[--color-foreground] hover:text-[--color-accent] transition-colors"
-        >
-          Josh Sklar
-        </button>
-        <div className="hidden sm:flex items-center gap-6 text-xs text-[--color-muted]">
-          {[
-            ["About", "about"],
-            ["Career", "career"],
-            ["Writing", "writing"],
-            ["Contact", "contact"],
-          ].map(([label, id]) => (
-            <button
-              key={id}
-              onClick={() => scrollTo(id)}
-              className="hover:text-[--color-foreground] transition-colors"
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-      </div>
-    </nav>
-  );
-}
+const navItems = [
+  { name: "Josh", url: "#hero", icon: HomeIcon },
+  { name: "About", url: "#about", icon: User },
+  { name: "Career", url: "#career", icon: Briefcase },
+  { name: "Writing", url: "#writing", icon: PenLine },
+  { name: "Contact", url: "#contact", icon: Mail },
+];
 
 /* ------------------------------------------------------------------ */
 /*  Section 1 — Hero                                                  */
@@ -502,10 +477,10 @@ function Contact() {
 /* ------------------------------------------------------------------ */
 /*  Page                                                              */
 /* ------------------------------------------------------------------ */
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      <Nav />
+      <NavBar items={navItems} />
       <main>
         <Hero />
         <ByTheNumbers />
