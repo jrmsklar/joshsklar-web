@@ -310,22 +310,22 @@ const testimonials = [
   {
     text: "Your decision documents are absolutely award winning gold medal type stuff. Clear approvals, very clear guidance on options considered. The little plus and minus signs, and everything.",
     name: "Chief Product Officer",
-    role: "Jolly",
+    role: "",
   },
   {
     text: "In my past, I\u2019ve seen Product Managers not take an easy quick-win from their predecessor PM because they want to do their own thing or some other ego-driven reason. Josh on the other hand asked questions, identified the opportunity, and launched it. I love that behavior.",
     name: "VP of Product",
-    role: "StockX",
+    role: "",
   },
   {
     text: "Both in engineering and in product, you\u2019ve been someone I trusted, relied upon, and had the utmost faith that you would figure it out. Further, I really appreciate your level headedness, your ability to communicate with the team, and your constant desire to grow.",
     name: "Product Marketing Manager",
-    role: "StockX",
+    role: "",
   },
   {
     text: "Outside of work, you\u2019ve been an inspiration for me \u2014 whether it\u2019s been moonlighting as a B school student, the races and physical challenges you\u2019ve put yourself through and overcame, or just your open embrace and friendship. I hope that I can take your lessons and embody them for the rest of my life.",
     name: "Product Marketing Manager",
-    role: "StockX",
+    role: "",
   },
 ];
 

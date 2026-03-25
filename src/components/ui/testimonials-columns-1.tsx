@@ -43,9 +43,11 @@ export const TestimonialsColumn = (props: {
                       <div className="font-medium tracking-tight leading-5 text-[--color-foreground]">
                         {name}
                       </div>
-                      <div className="leading-5 text-[--color-muted] tracking-tight text-sm">
-                        {role}
-                      </div>
+                      {role && (
+                        <div className="leading-5 text-[--color-muted] tracking-tight text-sm">
+                          {role}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
