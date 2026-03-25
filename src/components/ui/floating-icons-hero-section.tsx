@@ -162,19 +162,19 @@ export function FloatingIconsHero() {
       {/* Center content */}
       <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
         {/* Circular headshot */}
-        <div className="mx-auto w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden mb-8 ring-4 ring-[#D2D2D7]/50 shadow-xl">
+        <div className="mx-auto w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden mb-8 ring-4 ring-[#D2D2D7]/50 shadow-xl">
           <Image
             src="/images/headshot-square.jpg"
             alt="Josh Sklar"
-            width={352}
-            height={352}
+            width={416}
+            height={416}
             priority
             className="w-full h-full object-cover"
           />
         </div>
 
         {/* Gradient title */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-[--color-foreground]">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-[--color-foreground]">
           Josh Sklar
         </h1>
 
