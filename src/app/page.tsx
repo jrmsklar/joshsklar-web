@@ -319,11 +319,31 @@ const testimonials = [
     name: "Product Marketing Manager",
     role: "",
   },
+  {
+    text: "Josh really shined during our UX reviews with detail-oriented feedback and reasoning backed by historical data results, all of which helped us to keep challenging funnel points driving forward. I enjoyed Josh\u2019s enthusiasm for the industry and always walked away from our conversations with new perspectives.",
+    name: "Lead Product Designer",
+    role: "",
+  },
+  {
+    text: "One of Josh\u2019s standout qualities is his exceptional skill in crafting well-written, comprehensive documents that communicate ideas and strategies with unparalleled clarity. Josh played a key role in shaping the Product Pages on StockX and solving complex All-in Ask challenges by collaborating seamlessly with cross-functional teams. His strategic thinking, authenticity, and his ability to \u201Csay it as it is\u201D ensures that teams are aligned and focused on the right priorities.",
+    name: "Lead Product Manager",
+    role: "",
+  },
+  {
+    text: "Josh has an extraordinary ability to envision and deliver world-class customer experiences. He has a meticulous approach to documentation and creates artifacts that are both clear and actionable\u2014something that made working with him as an engineer seamless and efficient. Josh excels at aligning diverse inputs from design, engineering, and business teams into a cohesive product vision. His ability to synthesize ideas and drive alignment made even the most complex projects feel manageable.",
+    name: "Senior Engineering Manager",
+    role: "",
+  },
+  {
+    text: "Josh demonstrated a deep understanding of market trends and customer needs. His people skills are unparalleled, enabling him to lead and inspire. What really sets Josh apart is his strategic use of questioning to drive innovation, as he consistently challenges assumptions and explores new perspectives to push the boundaries of what\u2019s possible. Josh is not just an exceptional Product Leader but an even better person whom I would highly recommend.",
+    name: "Business Operations Manager",
+    role: "",
+  },
 ];
 
-const firstColumn = testimonials.slice(0, 2);
-const secondColumn = testimonials.slice(2, 4);
-const thirdColumn = [testimonials[0], testimonials[3]];
+const firstColumn = testimonials.slice(0, 3);
+const secondColumn = testimonials.slice(3, 6);
+const thirdColumn = testimonials.slice(6, 8);
 
 function Testimonials() {
   return (
