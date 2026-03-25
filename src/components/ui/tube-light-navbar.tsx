@@ -18,6 +18,7 @@ interface NavBarProps {
 export function NavBar({ items, className }: NavBarProps) {
     const [activeTab, setActiveTab] = useState(items[0].name)
     const [isMobile, setIsMobile] = useState(false)
+    const isClickScrolling = React.useRef(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -28,11 +29,42 @@ export function NavBar({ items, className }: NavBarProps) {
         return () => window.removeEventListener("resize", handleResize)
     }, [])
 
+    // Watch sections and update active tab on scroll
+    useEffect(() => {
+        const sectionIds = items.map((item) => item.url.replace("#", ""))
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (isClickScrolling.current) return
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        const match = items.find(
+                            (item) => item.url.replace("#", "") === entry.target.id
+                        )
+                        if (match) setActiveTab(match.name)
+                    }
+                }
+            },
+            { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+        )
+
+        sectionIds.forEach((id) => {
+            const el = document.getElementById(id)
+            if (el) observer.observe(el)
+        })
+
+        return () => observer.disconnect()
+    }, [items])
+
     const handleClick = useCallback((e: React.MouseEvent, item: NavItem) => {
         e.preventDefault()
         setActiveTab(item.name)
+        isClickScrolling.current = true
         const id = item.url.replace("#", "")
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+        // Re-enable scroll detection after smooth scroll completes
+        setTimeout(() => {
+            isClickScrolling.current = false
+        }, 1000)
     }, [])
 
     return (
