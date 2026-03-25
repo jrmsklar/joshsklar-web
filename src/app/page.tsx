@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useRef, useCallback, useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { NavBar } from "@/components/ui/tube-light-navbar";
 import { FloatingIconsHero } from "@/components/ui/floating-icons-hero-section";
@@ -381,7 +381,58 @@ function Testimonials() {
 /* ------------------------------------------------------------------ */
 /*  Section 6 — Writing                                               */
 /* ------------------------------------------------------------------ */
+const linkedInPosts = [
+  {
+    url: "https://www.linkedin.com/posts/jrmsklar_i-used-to-work-with-someone-who-almost-every-activity-7303460839217397760-_vYy",
+    date: "March 6, 2025",
+    excerpt: "I used to work with someone who almost every time they wanted to communicate something, they\u2019d send a Slack DM. Stop doing this. Default to public channels instead. Here\u2019s why...",
+    likes: "4,328",
+    comments: "305",
+  },
+  {
+    url: "https://www.linkedin.com/posts/jrmsklar_four-years-ago-we-had-an-offsite-at-stockx-activity-7417994265479274496-82Ki",
+    date: "January 16, 2026",
+    excerpt: "Four years ago we had an offsite at StockX. A leader shared a simple trick: \u201CAny time you\u2019re feeling a strong emotion, if you just name it out loud it immediately cuts the intensity down by about half.\u201D It\u2019s the simplest thing I\u2019ve ever learned and I still use it...",
+    likes: "68",
+    comments: "6",
+  },
+  {
+    url: "https://www.linkedin.com/posts/jrmsklar_bad-ui-in-the-real-world-part-2-the-input-activity-7384601832091824128-z6E7",
+    date: "October 16, 2025",
+    excerpt: "Bad UI in the Real World, Part 2: The Input Button. I spent 2 minutes trying to change the input on my TV and almost gave up thinking it was broken. Two buttons looked nearly identical...",
+    likes: "55",
+    comments: "71",
+  },
+  {
+    url: "https://www.linkedin.com/posts/jrmsklar_bad-ui-in-the-real-world-part-3-the-immersive-activity-7414452349605187584-RKG3",
+    date: "January 6, 2026",
+    excerpt: "Bad UI in the Real World, Part 3: The Immersive Bathroom. This vanity backdrop in the rainforest of Costa Rica was unlike most \u2014 beautiful, bright, and completely immersive in nature... and not a single mirror.",
+    likes: "35",
+    comments: "19",
+  },
+];
+
 function Writing() {
+  const [currentPost, setCurrentPost] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const navigate = (newIndex: number) => {
+    setDirection(newIndex > currentPost ? 1 : -1);
+    setCurrentPost(newIndex);
+  };
+
+  const prev = () => {
+    const newIndex = (currentPost - 1 + linkedInPosts.length) % linkedInPosts.length;
+    setDirection(-1);
+    setCurrentPost(newIndex);
+  };
+
+  const next = () => {
+    const newIndex = (currentPost + 1) % linkedInPosts.length;
+    setDirection(1);
+    setCurrentPost(newIndex);
+  };
+
   return (
     <section
       id="writing"
@@ -396,6 +447,90 @@ function Writing() {
             I write about product, design, and leadership. Most of it lives on
             LinkedIn.
           </p>
+
+          {/* LinkedIn post carousel */}
+          <div className="relative mb-8 flex items-center gap-3">
+            {/* Left arrow */}
+            <button
+              onClick={prev}
+              className="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-full bg-white border border-[#D2D2D7] text-[#6E6E73] hover:text-[#1D1D1F] hover:border-[#6E6E73] transition-colors shadow-sm"
+              aria-label="Previous post"
+            >
+              &larr;
+            </button>
+
+            {/* Card with animation */}
+            <div className="flex-1 overflow-hidden relative">
+              <AnimatePresence initial={false} custom={direction} mode="popLayout">
+              <motion.div
+                key={currentPost}
+                custom={direction}
+                initial={{ opacity: 0, x: direction * 300 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -direction * 300 }}
+                transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+              >
+                <a
+                  href={linkedInPosts[currentPost].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-2xl border border-[--color-divider] bg-white p-6 hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                      <Image
+                        src="/images/headshot-square.jpg"
+                        alt="Josh Sklar"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-[--color-foreground]">Josh Sklar</p>
+                      <p className="text-xs text-[--color-muted]">{linkedInPosts[currentPost].date}</p>
+                    </div>
+                    <svg className="ml-auto w-5 h-5 text-[#0A66C2]" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </div>
+                  <p className="text-sm text-[--color-foreground] leading-relaxed line-clamp-4">
+                    {linkedInPosts[currentPost].excerpt}
+                  </p>
+                  <div className="flex items-center gap-4 mt-4 text-xs text-[--color-muted]">
+                    <span>{linkedInPosts[currentPost].likes} likes</span>
+                    <span>{linkedInPosts[currentPost].comments} comments</span>
+                  </div>
+                </a>
+              </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Right arrow */}
+            <button
+              onClick={next}
+              className="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-full bg-white border border-[#D2D2D7] text-[#6E6E73] hover:text-[#1D1D1F] hover:border-[#6E6E73] transition-colors shadow-sm"
+              aria-label="Next post"
+            >
+              &rarr;
+            </button>
+          </div>
+
+          {/* Dots */}
+          <div className="flex items-center justify-center gap-2 mb-8">
+            {linkedInPosts.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => navigate(i)}
+                className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                  i === currentPost
+                    ? "bg-[#1D1D1F]"
+                    : "bg-[#D2D2D7] hover:bg-[#6E6E73]"
+                }`}
+                aria-label={`View post ${i + 1}`}
+              />
+            ))}
+          </div>
 
           <a
             href="https://www.linkedin.com/in/jrmsklar"
