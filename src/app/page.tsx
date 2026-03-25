@@ -102,6 +102,11 @@ function ByTheNumbers() {
       className="py-20 border-y border-[--color-divider] bg-[#F5F5F3]"
     >
       <FadeUp>
+        <div className="max-w-3xl mx-auto px-6">
+          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-10 text-center">
+            By The Numbers
+          </p>
+        </div>
         <div className="max-w-3xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-3 gap-y-10 gap-x-8">
           {stats.map((s) => (
             <div
