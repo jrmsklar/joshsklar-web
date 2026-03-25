@@ -392,61 +392,6 @@ function Writing() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Section 7 — Favorite Books                                        */
-/* ------------------------------------------------------------------ */
-const books = [
-  {
-    title: "How to Win Friends and Influence People",
-    author: "Dale Carnegie",
-    note: "Embarrassingly useful. I was skeptical, then I wasn\u2019t.",
-  },
-  {
-    title: "Originals",
-    author: "Adam Grant",
-    note: null,
-  },
-  {
-    title: "Crucial Conversations",
-    author: "Kerry Patterson et al.",
-    note: null,
-  },
-];
-
-function FavoriteBooks() {
-  return (
-    <section className="py-28 md:py-36 border-t border-[--color-divider]">
-      <FadeUp>
-        <div className="max-w-3xl mx-auto px-6">
-          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-2">
-            Favorite Books
-          </p>
-          <p className="text-base text-[--color-muted] mb-12">
-            Books I come back to, recommend often, or think about more than I
-            expected to.
-          </p>
-
-          <div className="space-y-6">
-            {books.map((b) => (
-              <div key={b.title}>
-                <p className="text-base font-medium">
-                  {b.title}{" "}
-                  <span className="font-normal text-[--color-muted]">
-                    &mdash; {b.author}
-                  </span>
-                </p>
-                {b.note && (
-                  <p className="mt-1 text-sm text-[--color-muted]">{b.note}</p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </FadeUp>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /*  Section 8 — Contact / Footer                                      */
 /* ------------------------------------------------------------------ */
 function Contact() {
@@ -505,7 +450,7 @@ export default function HomePage() {
         <Career />
         <Testimonials />
         <Writing />
-        <FavoriteBooks />
+
       </main>
       <Contact />
     </>
