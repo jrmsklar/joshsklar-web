@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 import { motion } from "motion/react";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { NavBar } from "@/components/ui/tube-light-navbar";
 import { FloatingIconsHero } from "@/components/ui/floating-icons-hero-section";
+import { Counter } from "@/components/ui/animated-counter";
 import { Home as HomeIcon, User, Briefcase, PenLine, Mail } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -67,26 +68,58 @@ const navItems = [
 /*  Section 2 — By The Numbers                                        */
 /* ------------------------------------------------------------------ */
 const stats = [
-  { number: "19th", lines: ["Employee", "at StockX"] },
-  { number: "20+", lines: ["Apps Built", "& Shipped"] },
-  { number: "3", lines: ["Series A+", "Startups"] },
-  { number: "6", lines: ["Ironman", "70.3s"] },
-  { number: "2", lines: ["NYC", "Marathons"] },
-  { number: "3", lines: ["Mix-Media", "Art Publications"] },
+  { target: 19, suffix: "th", lines: ["Employee", "at StockX"] },
+  { target: 20, suffix: "+", lines: ["Apps Built", "& Shipped"] },
+  { target: 3, suffix: "", lines: ["Series A+", "Startups"] },
+  { target: 6, suffix: "", lines: ["Ironman", "70.3s"] },
+  { target: 2, suffix: "", lines: ["NYC", "Marathons"] },
+  { target: 3, suffix: "", lines: ["Mix-Media", "Art Publications"] },
 ];
 
 function ByTheNumbers() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-20 border-y border-[--color-divider] bg-[#F5F5F3]">
+    <section
+      ref={sectionRef}
+      className="py-20 border-y border-[--color-divider] bg-[#F5F5F3]"
+    >
       <FadeUp>
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 md:gap-0 md:divide-x md:divide-[--color-divider]">
+        <div className="max-w-3xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-3 gap-y-10 gap-x-8">
           {stats.map((s) => (
             <div
-              key={s.number + s.lines[0]}
-              className="text-center md:px-6 first:md:pl-0 last:md:pr-0"
+              key={s.target + s.lines[0]}
+              className="text-center"
             >
-              <div className="text-4xl md:text-5xl font-semibold tracking-tight">
-                {s.number}
+              <div className="flex items-center justify-center font-semibold tracking-tight">
+                <Counter
+                  end={s.target}
+                  duration={1}
+                  fontSize={48}
+                  started={started}
+                />
+                {s.suffix && (
+                  <span className="text-4xl md:text-5xl font-semibold tracking-tight">
+                    {s.suffix}
+                  </span>
+                )}
               </div>
               {s.lines.map((line) => (
                 <div
