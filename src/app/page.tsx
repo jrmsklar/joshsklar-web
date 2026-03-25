@@ -5,6 +5,7 @@ import { useEffect, useRef, useCallback } from "react";
 import { motion } from "motion/react";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { NavBar } from "@/components/ui/tube-light-navbar";
+import { FloatingIconsHero } from "@/components/ui/floating-icons-hero-section";
 import { Home as HomeIcon, User, Briefcase, PenLine, Mail } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -59,63 +60,8 @@ const navItems = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Section 1 — Hero                                                  */
+/*  Section 1 — Hero (floating icons component)                       */
 /* ------------------------------------------------------------------ */
-function Hero() {
-  return (
-    <section
-      id="hero"
-      className="min-h-screen flex items-center pt-12"
-    >
-      <div className="max-w-5xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-        {/* Photo — shown first on mobile */}
-        <div className="order-first md:order-last flex justify-center md:justify-end">
-          <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden">
-            <Image
-              src="/images/headshot-optimized.jpg"
-              alt="Josh Sklar"
-              width={800}
-              height={1000}
-              priority
-              className="w-full h-full object-cover object-top"
-            />
-          </div>
-        </div>
-
-        {/* Text */}
-        <div className="order-last md:order-first">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-none">
-            Josh Sklar
-          </h1>
-          <p className="mt-4 text-lg md:text-xl text-[--color-muted] leading-relaxed max-w-lg">
-            Product and engineering leader. Passionate about people-first
-            culture. 14+ years of building and scaling consumer apps.
-          </p>
-          <p className="mt-6 text-base text-[--color-foreground] leading-relaxed max-w-lg">
-            I&rsquo;ve spent my career helping companies build things people
-            actually use&nbsp;&mdash; from the early days of a scrappy startup to
-            shipping products at scale. I&rsquo;m based in New York. I do a lot
-            of cool things outside of work too.
-          </p>
-          <div className="mt-8 flex items-center gap-6 text-sm">
-            <a
-              href="#about"
-              className="text-[--color-accent] hover:underline"
-            >
-              Read more &darr;
-            </a>
-            <a
-              href="#contact"
-              className="text-[--color-accent] hover:underline"
-            >
-              Get in touch &rarr;
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 /*  Section 2 — By The Numbers                                        */
@@ -482,7 +428,7 @@ export default function HomePage() {
     <>
       <NavBar items={navItems} />
       <main>
-        <Hero />
+        <FloatingIconsHero />
         <ByTheNumbers />
         <About />
         <Career />
