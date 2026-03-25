@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useCallback } from "react";
+import { motion } from "motion/react";
+import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 
 /* ------------------------------------------------------------------ */
 /*  Intersection Observer hook for fade-up                            */
@@ -304,50 +306,62 @@ function Career() {
 /* ------------------------------------------------------------------ */
 /*  Section 5 — What Others Say                                       */
 /* ------------------------------------------------------------------ */
-const quotes = [
+const testimonials = [
   {
     text: "Your decision documents are absolutely award winning gold medal type stuff. Clear approvals, very clear guidance on options considered. The little plus and minus signs, and everything.",
-    attribution: "Chief Product Officer",
+    name: "Chief Product Officer",
+    role: "Jolly",
   },
   {
     text: "In my past, I\u2019ve seen Product Managers not take an easy quick-win from their predecessor PM because they want to do their own thing or some other ego-driven reason. Josh on the other hand asked questions, identified the opportunity, and launched it. I love that behavior.",
-    attribution: "VP of Product",
+    name: "VP of Product",
+    role: "StockX",
   },
   {
     text: "Both in engineering and in product, you\u2019ve been someone I trusted, relied upon, and had the utmost faith that you would figure it out. Further, I really appreciate your level headedness, your ability to communicate with the team, and your constant desire to grow.",
-    attribution: "Product Marketing Manager",
+    name: "Product Marketing Manager",
+    role: "StockX",
+  },
+  {
+    text: "Outside of work, you\u2019ve been an inspiration for me \u2014 whether it\u2019s been moonlighting as a B school student, the races and physical challenges you\u2019ve put yourself through and overcame, or just your open embrace and friendship. I hope that I can take your lessons and embody them for the rest of my life.",
+    name: "Product Marketing Manager",
+    role: "StockX",
   },
 ];
 
+const firstColumn = testimonials.slice(0, 2);
+const secondColumn = testimonials.slice(2, 4);
+const thirdColumn = [testimonials[0], testimonials[3]];
+
 function Testimonials() {
   return (
-    <section className="py-28 md:py-36 border-t border-[--color-divider]">
-      <FadeUp>
-        <div className="max-w-5xl mx-auto px-6">
-          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-12">
+    <section className="py-28 md:py-36 border-t border-[--color-divider] relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center justify-center max-w-[540px] mx-auto mb-10"
+        >
+          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-4">
             What Others Say
           </p>
-
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-            {quotes.map((q, i) => (
-              <div key={i} className={i === 2 ? "md:col-span-2 md:max-w-[65ch]" : ""}>
-                <span
-                  className="block text-6xl leading-none text-[--color-divider] font-serif select-none"
-                  aria-hidden
-                >
-                  &ldquo;
-                </span>
-                <blockquote className="-mt-4 text-lg leading-relaxed font-serif italic text-[--color-foreground]">
-                  {q.text}
-                </blockquote>
-                <p className="mt-4 text-xs uppercase tracking-widest text-[--color-muted]">
-                  &mdash; {q.attribution}
-                </p>
-              </div>
-            ))}
-          </div>
+        </motion.div>
+        <div className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
+          <TestimonialsColumn testimonials={firstColumn} duration={15} />
+          <TestimonialsColumn
+            testimonials={secondColumn}
+            className="hidden md:block"
+            duration={19}
+          />
+          <TestimonialsColumn
+            testimonials={thirdColumn}
+            className="hidden lg:block"
+            duration={17}
+          />
         </div>
-      </FadeUp>
+      </div>
     </section>
   );
 }

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Josh Sklar — Product & Engineering Leader",
@@ -17,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("antialiased", "font-sans", geist.variable)}>
-      <body className="min-h-screen">{children}</body>
+    <html lang="en" className={`antialiased ${geist.variable}`}>
+      <body className="min-h-screen font-sans">{children}</body>
     </html>
   );
 }
