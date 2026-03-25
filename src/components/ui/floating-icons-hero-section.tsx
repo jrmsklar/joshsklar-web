@@ -9,22 +9,27 @@ interface IconData {
   id: number;
   src: string;
   alt: string;
-  className: string;
+  desktopClassName: string;
+  mobileClassName?: string; // if set, shown on mobile with this position
   hideOnMobile?: boolean;
 }
 
 const icons: IconData[] = [
-  { id: 1, src: "/images/app_icons/dominos-app-icon.webp", alt: "Domino's", className: "top-[15%] left-[10%]" },
-  { id: 2, src: "/images/app_icons/pickle-app-icon.webp", alt: "Pickle", className: "top-[18%] left-[30%]", hideOnMobile: true },
-  { id: 3, src: "/images/app_icons/jolly-app-icon.webp", alt: "Jolly", className: "top-[15%] right-[28%]", hideOnMobile: true },
-  { id: 4, src: "/images/app_icons/kiai-motors-app-icon.webp", alt: "KIA Motors", className: "top-[18%] right-[10%]" },
-  { id: 5, src: "/images/app_icons/companion-app-icon.png", alt: "Companion", className: "top-[38%] left-[8%]" },
-  { id: 6, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", className: "top-[42%] right-[8%]" },
-  { id: 7, src: "/images/app_icons/social-justice-challenge-icon.png", alt: "Social Justice Challenge", className: "top-[62%] left-[10%]", hideOnMobile: true },
-  { id: 8, src: "/images/app_icons/freezebrew-logo.png", alt: "FreezeBrew", className: "top-[60%] right-[10%]" },
-  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", className: "bottom-[12%] left-[15%]" },
-  { id: 10, src: "/images/app_icons/secret-app-icon.png", alt: "Secret", className: "bottom-[8%] left-[35%]", hideOnMobile: true },
-  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", className: "bottom-[12%] right-[15%]" },
+  // Priority 1-3: above headshot on mobile, top row on desktop
+  { id: 1, src: "/images/app_icons/stockx-app-icon.png", alt: "StockX", desktopClassName: "top-[15%] left-[10%]", mobileClassName: "top-[12%] left-[5%]" },
+  { id: 2, src: "/images/app_icons/dominos-app-icon.png", alt: "Domino's", desktopClassName: "top-[18%] left-[30%]", mobileClassName: "top-[10%] left-[38%]" },
+  { id: 3, src: "/images/app_icons/pickle-app-icon.jpeg", alt: "Pickle", desktopClassName: "top-[15%] right-[28%]", mobileClassName: "top-[12%] right-[5%]" },
+  // Priority 4-6: below CTAs on mobile, mid row on desktop
+  { id: 4, src: "/images/app_icons/kiai-motors-app-icon.webp", alt: "KIA Motors", desktopClassName: "top-[18%] right-[10%]", mobileClassName: "bottom-[4%] left-[5%]" },
+  { id: 5, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", desktopClassName: "top-[38%] left-[8%]", mobileClassName: "bottom-[2%] left-[38%]" },
+  { id: 6, src: "/images/app_icons/jolly-app-icon.png", alt: "Jolly", desktopClassName: "top-[42%] right-[8%]", mobileClassName: "bottom-[4%] right-[5%]" },
+  // Rest: desktop only
+  { id: 7, src: "/images/app_icons/companion-app-icon.png", alt: "Companion", desktopClassName: "top-[62%] left-[10%]", hideOnMobile: true },
+  { id: 8, src: "/images/app_icons/freezebrew-logo.png", alt: "FreezeBrew", desktopClassName: "top-[60%] right-[10%]", hideOnMobile: true },
+  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", desktopClassName: "bottom-[12%] left-[15%]", hideOnMobile: true },
+  { id: 10, src: "/images/app_icons/secret-app-icon.png", alt: "Secret", desktopClassName: "bottom-[8%] left-[35%]", hideOnMobile: true },
+  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", desktopClassName: "bottom-[12%] right-[15%]", hideOnMobile: true },
+  { id: 12, src: "/images/app_icons/social-justice-challenge-icon.png", alt: "Social Justice Challenge", desktopClassName: "bottom-[8%] right-[35%]", hideOnMobile: true },
 ];
 
 function FloatingIcon({
@@ -32,11 +37,13 @@ function FloatingIcon({
   mouseX,
   mouseY,
   index,
+  isMobile,
 }: {
   iconData: IconData;
   mouseX: React.RefObject<number>;
   mouseY: React.RefObject<number>;
   index: number;
+  isMobile: boolean;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -85,7 +92,7 @@ function FloatingIcon({
       className={cn(
         "absolute pointer-events-none",
         iconData.hideOnMobile && "hidden md:block",
-        iconData.className
+        isMobile && iconData.mobileClassName ? iconData.mobileClassName : iconData.desktopClassName,
       )}
     >
       <motion.div
@@ -118,6 +125,14 @@ function FloatingIcon({
 export function FloatingIconsHero() {
   const mouseX = React.useRef(0);
   const mouseY = React.useRef(0);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
     mouseX.current = event.clientX;
@@ -139,6 +154,7 @@ export function FloatingIconsHero() {
             mouseX={mouseX}
             mouseY={mouseY}
             index={index}
+            isMobile={isMobile}
           />
         ))}
       </div>
