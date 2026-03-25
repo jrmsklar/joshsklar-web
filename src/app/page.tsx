@@ -204,6 +204,7 @@ const roles = [
     company: "Jolly",
     title: "SVP of Product",
     icon: "/images/app_icons/jolly-app-icon.png",
+    url: "https://jolly.com",
     description:
       "Led product for a B2B2C SaaS workforce performance optimization platform that helped frontline workers earn a stake in the outcomes they drive and feel more connected to their companies. Drove a full platform rebuild.",
   },
@@ -211,6 +212,7 @@ const roles = [
     company: "Pickle",
     title: "Head of Product",
     icon: "/images/app_icons/pickle-app-icon.jpeg",
+    url: "https://shoponpickle.com",
     description:
       "Joined as the 12th employee. Led product for a peer-to-peer clothing rental marketplace. Drove initiatives to increase offer acceptance rate, click-through rate, and order conversion rate.",
   },
@@ -218,6 +220,7 @@ const roles = [
     company: "StockX",
     title: "Lead Product Manager",
     icon: "/images/app_icons/stockx-app-icon.png",
+    url: "https://stockx.com",
     description:
       "Joined as the 19th employee. Built the iOS app, led engineering teams, and ran product for parts of the consumer purchasing experience\u2009\u2014\u2009product discovery, research, and catalog.",
   },
@@ -225,6 +228,7 @@ const roles = [
     company: "Earlier",
     title: "Software Engineer \u00b7 Various Companies",
     icon: null,
+    url: null,
     description:
       "Worked as a software engineer before moving into product full-time, shipping apps for Fortune 500 clients including Domino\u2019s Pizza and KIA Motors. That foundation still shapes how I think about technical tradeoffs and what\u2019s actually hard to build.",
   },
@@ -260,7 +264,19 @@ function Career() {
                   )}
                   <div>
                     <h3 className="text-2xl font-semibold tracking-tight">
-                      {role.company}
+                      {role.url ? (
+                        <a
+                          href={role.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-[--color-accent] hover:underline transition-colors inline-flex items-center gap-1"
+                        >
+                          {role.company}
+                          <span className="text-sm text-[--color-muted]">&rarr;</span>
+                        </a>
+                      ) : (
+                        role.company
+                      )}
                     </h3>
                     <p className="text-sm text-[--color-muted]">
                       {role.title}
