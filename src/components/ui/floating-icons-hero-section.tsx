@@ -14,17 +14,17 @@ interface IconData {
 }
 
 const icons: IconData[] = [
-  { id: 1, src: "/images/app_icons/dominos-app-icon.webp", alt: "Domino's", className: "top-[8%] left-[5%]" },
-  { id: 2, src: "/images/app_icons/pickle-app-icon.webp", alt: "Pickle", className: "top-[12%] left-[28%]", hideOnMobile: true },
-  { id: 3, src: "/images/app_icons/jolly-app-icon.webp", alt: "Jolly", className: "top-[6%] left-[58%]", hideOnMobile: true },
-  { id: 4, src: "/images/app_icons/kiai-motors-app-icon.webp", alt: "KIA Motors", className: "top-[15%] right-[8%]" },
-  { id: 5, src: "/images/app_icons/companion-app-icon.png", alt: "Companion", className: "top-[35%] left-[3%]" },
-  { id: 6, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", className: "top-[45%] right-[3%]" },
-  { id: 7, src: "/images/app_icons/social-justice-challenge-icon.png", alt: "Social Justice Challenge", className: "top-[65%] left-[5%]", hideOnMobile: true },
-  { id: 8, src: "/images/app_icons/freezebrew-logo.png", alt: "FreezeBrew", className: "top-[62%] right-[6%]" },
-  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", className: "bottom-[10%] left-[12%]" },
-  { id: 10, src: "/images/app_icons/secret-app-icon.png", alt: "Secret", className: "bottom-[5%] left-[30%]", hideOnMobile: true },
-  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", className: "bottom-[12%] right-[10%]" },
+  { id: 1, src: "/images/app_icons/dominos-app-icon.webp", alt: "Domino's", className: "top-[15%] left-[10%]" },
+  { id: 2, src: "/images/app_icons/pickle-app-icon.webp", alt: "Pickle", className: "top-[18%] left-[30%]", hideOnMobile: true },
+  { id: 3, src: "/images/app_icons/jolly-app-icon.webp", alt: "Jolly", className: "top-[15%] right-[28%]", hideOnMobile: true },
+  { id: 4, src: "/images/app_icons/kiai-motors-app-icon.webp", alt: "KIA Motors", className: "top-[18%] right-[10%]" },
+  { id: 5, src: "/images/app_icons/companion-app-icon.png", alt: "Companion", className: "top-[38%] left-[8%]" },
+  { id: 6, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", className: "top-[42%] right-[8%]" },
+  { id: 7, src: "/images/app_icons/social-justice-challenge-icon.png", alt: "Social Justice Challenge", className: "top-[62%] left-[10%]", hideOnMobile: true },
+  { id: 8, src: "/images/app_icons/freezebrew-logo.png", alt: "FreezeBrew", className: "top-[60%] right-[10%]" },
+  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", className: "bottom-[12%] left-[15%]" },
+  { id: 10, src: "/images/app_icons/secret-app-icon.png", alt: "Secret", className: "bottom-[8%] left-[35%]", hideOnMobile: true },
+  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", className: "bottom-[12%] right-[15%]" },
 ];
 
 function FloatingIcon({
@@ -89,7 +89,7 @@ function FloatingIcon({
       )}
     >
       <motion.div
-        className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-2xl shadow-lg bg-white/80 backdrop-blur-sm border border-white/20 overflow-hidden"
+        className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl shadow-lg bg-white/80 backdrop-blur-sm border border-white/20 overflow-hidden"
         animate={{
           y: [0, -8, 0, 8, 0],
           x: [0, 4, 0, -4, 0],
@@ -105,10 +105,10 @@ function FloatingIcon({
         <Image
           src={iconData.src}
           alt={iconData.alt}
-          width={64}
-          height={64}
+          width={80}
+          height={80}
           className="w-full h-full object-cover"
-          sizes="64px"
+          sizes="80px"
         />
       </motion.div>
     </motion.div>
@@ -146,19 +146,19 @@ export function FloatingIconsHero() {
       {/* Center content */}
       <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
         {/* Circular headshot */}
-        <div className="mx-auto w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden mb-8 ring-4 ring-[#D2D2D7]/50 shadow-xl">
+        <div className="mx-auto w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden mb-8 ring-4 ring-[#D2D2D7]/50 shadow-xl">
           <Image
             src="/images/headshot-square.jpg"
             alt="Josh Sklar"
-            width={288}
-            height={288}
+            width={352}
+            height={352}
             priority
             className="w-full h-full object-cover"
           />
         </div>
 
         {/* Gradient title */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight bg-gradient-to-b from-[#1D1D1F] to-[#6E6E73] bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-[--color-foreground]">
           Josh Sklar
         </h1>
 
