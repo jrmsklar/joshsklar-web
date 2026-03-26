@@ -453,7 +453,7 @@ function Writing() {
             {/* Left arrow */}
             <button
               onClick={prev}
-              className="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-full bg-white border border-[#D2D2D7] text-[#6E6E73] hover:text-[#1D1D1F] hover:border-[#6E6E73] transition-colors shadow-sm"
+              className="flex shrink-0 w-8 h-8 items-center justify-center rounded-full bg-white border border-[#D2D2D7] text-[#6E6E73] hover:text-[#1D1D1F] hover:border-[#6E6E73] transition-colors shadow-sm"
               aria-label="Previous post"
             >
               &larr;
@@ -509,7 +509,7 @@ function Writing() {
             {/* Right arrow */}
             <button
               onClick={next}
-              className="hidden sm:flex shrink-0 w-8 h-8 items-center justify-center rounded-full bg-white border border-[#D2D2D7] text-[#6E6E73] hover:text-[#1D1D1F] hover:border-[#6E6E73] transition-colors shadow-sm"
+              className="flex shrink-0 w-8 h-8 items-center justify-center rounded-full bg-white border border-[#D2D2D7] text-[#6E6E73] hover:text-[#1D1D1F] hover:border-[#6E6E73] transition-colors shadow-sm"
               aria-label="Next post"
             >
               &rarr;
