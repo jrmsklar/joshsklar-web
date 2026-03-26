@@ -187,7 +187,7 @@ export function FloatingIconsHero() {
         {/* Body text */}
         <p className="mt-4 text-base text-[--color-foreground] leading-relaxed max-w-lg mx-auto">
           I&rsquo;ve spent my career helping companies build things people
-          actually use&nbsp;&mdash; from the early days of a scrappy startup to
+          actually use, from the early days of a scrappy startup to
           shipping products at scale. I&rsquo;m based in New York.
         </p>
 
