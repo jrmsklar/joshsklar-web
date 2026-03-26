@@ -24,12 +24,12 @@ const icons: IconData[] = [
   // Left column: evenly spaced down the left side
   { id: 5, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", desktopClassName: "top-[32%] left-[7%]", shortViewportClassName: "top-[30%] left-[7%]", mobileClassName: "bottom-[2%] left-[38%]" },
   { id: 7, src: "/images/app_icons/companion-app-icon.png", alt: "Companion", desktopClassName: "top-[52%] left-[5%]", shortViewportClassName: "top-[47%] left-[5%]", hideOnMobile: true },
-  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", desktopClassName: "top-[72%] left-[7%]", shortViewportClassName: "top-[64%] left-[7%]", hideOnMobile: true },
+  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", desktopClassName: "top-[72%] left-[3%]", shortViewportClassName: "top-[64%] left-[3%]", hideOnMobile: true },
   { id: 10, src: "/images/app_icons/secret-app-icon.png", alt: "Secret", desktopClassName: "bottom-[6%] left-[28%]", shortViewportClassName: "top-[81%] left-[5%]", hideOnMobile: true },
   // Right column: evenly spaced down the right side
   { id: 6, src: "/images/app_icons/jolly-app-icon.png", alt: "Jolly", desktopClassName: "top-[32%] right-[7%]", shortViewportClassName: "top-[30%] right-[7%]", mobileClassName: "bottom-[4%] right-[5%]" },
   { id: 8, src: "/images/app_icons/freezebrew-logo.png", alt: "FreezeBrew", desktopClassName: "top-[52%] right-[5%]", shortViewportClassName: "top-[47%] right-[5%]", hideOnMobile: true },
-  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", desktopClassName: "top-[72%] right-[7%]", shortViewportClassName: "top-[64%] right-[7%]", hideOnMobile: true },
+  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", desktopClassName: "top-[72%] right-[3%]", shortViewportClassName: "top-[64%] right-[3%]", hideOnMobile: true },
   { id: 12, src: "/images/app_icons/social-justice-challenge-icon.png", alt: "Social Justice Challenge", desktopClassName: "bottom-[6%] right-[28%]", shortViewportClassName: "top-[81%] right-[5%]", hideOnMobile: true },
 ];
 
