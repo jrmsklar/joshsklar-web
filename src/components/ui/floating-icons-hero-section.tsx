@@ -96,7 +96,7 @@ function FloatingIcon({
       )}
     >
       <motion.div
-        className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl shadow-lg bg-white/80 backdrop-blur-sm border border-white/20 overflow-hidden"
+        className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl shadow-xl shadow-black/15 bg-white/80 backdrop-blur-sm border border-white/20 overflow-hidden"
         animate={{
           y: [0, -8, 0, 8, 0],
           x: [0, 4, 0, -4, 0],
