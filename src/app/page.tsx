@@ -73,7 +73,7 @@ const stats = [
   { target: 3, suffix: "", lines: ["Series A+", "Startups"] },
   { target: 6, suffix: "", lines: ["Ironman", "70.3s"] },
   { target: 2, suffix: "", lines: ["NYC", "Marathons"] },
-  { target: 3, suffix: "", lines: ["Mix-Media", "Art Publications"] },
+  { target: 3, suffix: "", lines: ["Mixed-Media", "Art Publications"] },
 ];
 
 function ByTheNumbers() {
@@ -157,34 +157,32 @@ function About() {
           <div className="space-y-5 text-base leading-relaxed text-[--color-foreground]">
             <p>
               I started my career as a software engineer. I loved building
-              things, but I kept finding myself more interested in{" "}
-              <em>why</em> we were building them than how. That instinct
+              things, but I kept finding myself more interested in
+              why we were building them than how. That instinct
               eventually pulled me into product.
             </p>
             <p>
               I joined StockX in 2016 as the 19th employee and spent eight and a
               half years there, building the iOS app and eventually leading
               product for parts of the consumer purchasing
-              experience&nbsp;&mdash; product discovery, research, and catalog.
+              experience – product discovery, research, and catalog.
             </p>
             <p>
               Since then, I&rsquo;ve led product at early-stage
-              startups&nbsp;&mdash; a peer-to-peer clothing rental marketplace
-              and a B2B2C employee engagement platform&nbsp;&mdash; working
-              across the full stack of what it means to run product: strategy,
+              startups, working across the full stack of what it means to run product: strategy,
               roadmaps, analytics, hiring, and the hard conversations that come
               with building in constrained environments.
             </p>
             <p>
               I care a lot about craft. Good product work, to me, looks a lot
-              like good writing&nbsp;&mdash; clear thinking made visible.
+              like good writing – clear thinking made visible.
               I&rsquo;m drawn to problems where the stakes are real and the
               feedback loops are tight.
             </p>
             <p>
               Outside of work, I spend a lot of time outdoors. I&rsquo;ve
               completed six Ironman 70.3s, two marathons, and a bunch of half
-              marathons. I play piano and love to make mix-media art pieces. My
+              marathons. I play piano and love to make mixed-media art pieces. My
               amazing fianc&eacute;e even let me hang one up right in our
               kitchen. I&rsquo;m Jewish and active in the NYC Jewish community. I
               currently live in NYC, but was born and raised in Michigan.
@@ -222,7 +220,7 @@ const roles = [
     icon: "/images/app_icons/stockx-app-icon.png",
     url: "https://stockx.com",
     description:
-      "Joined as the 19th employee. Built the iOS app, led engineering teams, and ran product for parts of the consumer purchasing experience\u2009\u2014\u2009product discovery, research, and catalog.",
+      "Joined as the 19th employee. Built the iOS app, led engineering teams, and ran product for parts of the consumer purchasing experience – product discovery, research, and catalog.",
   },
   {
     company: "Earlier",
