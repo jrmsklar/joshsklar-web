@@ -10,26 +10,27 @@ interface IconData {
   src: string;
   alt: string;
   desktopClassName: string;
-  mobileClassName?: string; // if set, shown on mobile with this position
+  shortViewportClassName?: string; // used on tablet/short viewports to avoid center overlap
+  mobileClassName?: string;
   hideOnMobile?: boolean;
 }
 
 const icons: IconData[] = [
   // Priority 1-3: above headshot on mobile, top row on desktop
   { id: 1, src: "/images/app_icons/stockx-app-icon.png", alt: "StockX", desktopClassName: "top-[15%] left-[10%]", mobileClassName: "top-[12%] left-[5%]" },
-  { id: 2, src: "/images/app_icons/dominos-app-icon.png", alt: "Domino's", desktopClassName: "top-[18%] left-[30%]", mobileClassName: "top-[10%] left-[38%]" },
-  { id: 3, src: "/images/app_icons/pickle-app-icon.jpeg", alt: "Pickle", desktopClassName: "top-[15%] right-[28%]", mobileClassName: "top-[12%] right-[5%]" },
-  // Priority 4-6: below CTAs on mobile, mid row on desktop
-  { id: 4, src: "/images/app_icons/kiai-motors-app-icon.webp", alt: "KIA Motors", desktopClassName: "top-[18%] right-[10%]", mobileClassName: "bottom-[4%] left-[5%]" },
-  { id: 5, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", desktopClassName: "top-[38%] left-[8%]", mobileClassName: "bottom-[2%] left-[38%]" },
-  { id: 6, src: "/images/app_icons/jolly-app-icon.png", alt: "Jolly", desktopClassName: "top-[42%] right-[8%]", mobileClassName: "bottom-[4%] right-[5%]" },
-  // Rest: desktop only
-  { id: 7, src: "/images/app_icons/companion-app-icon.png", alt: "Companion", desktopClassName: "top-[62%] left-[10%]", hideOnMobile: true },
-  { id: 8, src: "/images/app_icons/freezebrew-logo.png", alt: "FreezeBrew", desktopClassName: "top-[60%] right-[10%]", hideOnMobile: true },
-  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", desktopClassName: "bottom-[12%] left-[15%]", hideOnMobile: true },
-  { id: 10, src: "/images/app_icons/secret-app-icon.png", alt: "Secret", desktopClassName: "bottom-[8%] left-[35%]", hideOnMobile: true },
-  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", desktopClassName: "bottom-[12%] right-[15%]", hideOnMobile: true },
-  { id: 12, src: "/images/app_icons/social-justice-challenge-icon.png", alt: "Social Justice Challenge", desktopClassName: "bottom-[8%] right-[35%]", hideOnMobile: true },
+  { id: 2, src: "/images/app_icons/dominos-app-icon.png", alt: "Domino's", desktopClassName: "top-[10%] left-[28%]", mobileClassName: "top-[10%] left-[38%]" },
+  { id: 3, src: "/images/app_icons/pickle-app-icon.jpeg", alt: "Pickle", desktopClassName: "top-[10%] right-[28%]", mobileClassName: "top-[12%] right-[5%]" },
+  // Priority 4-6: below CTAs on mobile, outer edges on desktop
+  { id: 4, src: "/images/app_icons/kiai-motors-app-icon.webp", alt: "KIA Motors", desktopClassName: "top-[15%] right-[10%]", mobileClassName: "bottom-[4%] left-[5%]" },
+  { id: 5, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", desktopClassName: "top-[38%] left-[6%]", mobileClassName: "bottom-[2%] left-[38%]" },
+  { id: 6, src: "/images/app_icons/jolly-app-icon.png", alt: "Jolly", desktopClassName: "top-[42%] right-[6%]", mobileClassName: "bottom-[4%] right-[5%]" },
+  // Rest: desktop only — all on outer edges, none in center-bottom
+  { id: 7, src: "/images/app_icons/companion-app-icon.png", alt: "Companion", desktopClassName: "top-[62%] left-[3%]", hideOnMobile: true },
+  { id: 8, src: "/images/app_icons/freezebrew-logo.png", alt: "FreezeBrew", desktopClassName: "top-[60%] right-[3%]", hideOnMobile: true },
+  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", desktopClassName: "bottom-[12%] left-[3%]", hideOnMobile: true },
+  { id: 10, src: "/images/app_icons/secret-app-icon.png", alt: "Secret", desktopClassName: "bottom-[6%] left-[28%]", shortViewportClassName: "bottom-[4%] left-[3%]", hideOnMobile: true },
+  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", desktopClassName: "bottom-[12%] right-[3%]", hideOnMobile: true },
+  { id: 12, src: "/images/app_icons/social-justice-challenge-icon.png", alt: "Social Justice Challenge", desktopClassName: "bottom-[6%] right-[28%]", shortViewportClassName: "bottom-[4%] right-[3%]", hideOnMobile: true },
 ];
 
 function FloatingIcon({
@@ -38,12 +39,14 @@ function FloatingIcon({
   mouseY,
   index,
   isMobile,
+  isShortViewport,
 }: {
   iconData: IconData;
   mouseX: React.RefObject<number>;
   mouseY: React.RefObject<number>;
   index: number;
   isMobile: boolean;
+  isShortViewport: boolean;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -92,15 +95,19 @@ function FloatingIcon({
       className={cn(
         "absolute pointer-events-none",
         iconData.hideOnMobile && "hidden md:block",
-        isMobile && iconData.mobileClassName ? iconData.mobileClassName : iconData.desktopClassName,
+        isMobile && iconData.mobileClassName
+          ? iconData.mobileClassName
+          : isShortViewport && iconData.shortViewportClassName
+            ? iconData.shortViewportClassName
+            : iconData.desktopClassName,
       )}
     >
       <motion.div
         className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl shadow-xl shadow-black/15 bg-white/80 backdrop-blur-sm border border-white/20 overflow-hidden"
         animate={{
-          y: [0, -8, 0, 8, 0],
-          x: [0, 4, 0, -4, 0],
-          rotate: [0, 3, 0, -3, 0],
+          y: [0, -6, 0, 6, 0],
+          x: [0, 3, 0, -3, 0],
+          rotate: [0, 2, 0, -2, 0],
         }}
         transition={{
           duration: 5 + Math.random() * 5,
@@ -126,9 +133,13 @@ export function FloatingIconsHero() {
   const mouseX = React.useRef(0);
   const mouseY = React.useRef(0);
   const [isMobile, setIsMobile] = React.useState(false);
+  const [isShortViewport, setIsShortViewport] = React.useState(false);
 
   React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsShortViewport(window.innerWidth >= 768 && window.innerHeight < 900);
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -155,6 +166,7 @@ export function FloatingIconsHero() {
             mouseY={mouseY}
             index={index}
             isMobile={isMobile}
+            isShortViewport={isShortViewport}
           />
         ))}
       </div>
