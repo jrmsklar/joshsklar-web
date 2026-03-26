@@ -29,6 +29,14 @@ export const metadata: Metadata = {
       "Product and engineering leader with 14+ years building and scaling consumer apps. Based in New York.",
     images: ["/images/headshot-square.jpg"],
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
