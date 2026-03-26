@@ -55,6 +55,10 @@ function FloatingIcon({
   const springY = useSpring(y, { stiffness: 50, damping: 20 });
 
   React.useEffect(() => {
+    // Disable repulsion on touch devices to prevent scroll-induced shifting
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouch) return;
+
     let raf: number;
     const update = () => {
       if (ref.current && mouseX.current !== undefined && mouseY.current !== undefined) {
