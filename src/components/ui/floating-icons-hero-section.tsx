@@ -158,7 +158,7 @@ export function FloatingIconsHero() {
     <section
       id="hero"
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-16"
+      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-background pt-16"
     >
       {/* Floating icons layer */}
       <div className="absolute inset-0 w-full h-full">
