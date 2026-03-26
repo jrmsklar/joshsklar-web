@@ -16,21 +16,21 @@ interface IconData {
 }
 
 const icons: IconData[] = [
-  // Priority 1-3: above headshot on mobile, top row on desktop
-  { id: 1, src: "/images/app_icons/stockx-app-icon.png", alt: "StockX", desktopClassName: "top-[15%] left-[10%]", mobileClassName: "top-[12%] left-[5%]" },
-  { id: 2, src: "/images/app_icons/dominos-app-icon.png", alt: "Domino's", desktopClassName: "top-[10%] left-[28%]", mobileClassName: "top-[10%] left-[38%]" },
-  { id: 3, src: "/images/app_icons/pickle-app-icon.jpeg", alt: "Pickle", desktopClassName: "top-[10%] right-[28%]", mobileClassName: "top-[12%] right-[5%]" },
-  // Priority 4-6: below CTAs on mobile, outer edges on desktop
-  { id: 4, src: "/images/app_icons/kiai-motors-app-icon.webp", alt: "KIA Motors", desktopClassName: "top-[15%] right-[10%]", mobileClassName: "bottom-[4%] left-[5%]" },
-  { id: 5, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", desktopClassName: "top-[38%] left-[6%]", mobileClassName: "bottom-[2%] left-[38%]" },
-  { id: 6, src: "/images/app_icons/jolly-app-icon.png", alt: "Jolly", desktopClassName: "top-[42%] right-[6%]", mobileClassName: "bottom-[4%] right-[5%]" },
-  // Rest: desktop only — all on outer edges, none in center-bottom
-  { id: 7, src: "/images/app_icons/companion-app-icon.png", alt: "Companion", desktopClassName: "top-[62%] left-[3%]", hideOnMobile: true },
-  { id: 8, src: "/images/app_icons/freezebrew-logo.png", alt: "FreezeBrew", desktopClassName: "top-[60%] right-[3%]", hideOnMobile: true },
-  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", desktopClassName: "bottom-[12%] left-[3%]", hideOnMobile: true },
-  { id: 10, src: "/images/app_icons/secret-app-icon.png", alt: "Secret", desktopClassName: "bottom-[6%] left-[28%]", shortViewportClassName: "bottom-[4%] left-[3%]", hideOnMobile: true },
-  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", desktopClassName: "bottom-[12%] right-[3%]", hideOnMobile: true },
-  { id: 12, src: "/images/app_icons/social-justice-challenge-icon.png", alt: "Social Justice Challenge", desktopClassName: "bottom-[6%] right-[28%]", shortViewportClassName: "bottom-[4%] right-[3%]", hideOnMobile: true },
+  // Top row: flanking the headshot, pushed below navbar
+  { id: 1, src: "/images/app_icons/stockx-app-icon.png", alt: "StockX", desktopClassName: "top-[14%] left-[8%]", mobileClassName: "top-[12%] left-[5%]" },
+  { id: 2, src: "/images/app_icons/dominos-app-icon.png", alt: "Domino's", desktopClassName: "top-[12%] left-[28%]", mobileClassName: "top-[10%] left-[38%]" },
+  { id: 3, src: "/images/app_icons/pickle-app-icon.jpeg", alt: "Pickle", desktopClassName: "top-[12%] right-[28%]", mobileClassName: "top-[12%] right-[5%]" },
+  { id: 4, src: "/images/app_icons/kiai-motors-app-icon.webp", alt: "KIA Motors", desktopClassName: "top-[14%] right-[8%]", mobileClassName: "bottom-[4%] left-[5%]" },
+  // Left column: evenly spaced down the left side
+  { id: 5, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", desktopClassName: "top-[32%] left-[7%]", shortViewportClassName: "top-[30%] left-[7%]", mobileClassName: "bottom-[2%] left-[38%]" },
+  { id: 7, src: "/images/app_icons/companion-app-icon.png", alt: "Companion", desktopClassName: "top-[52%] left-[5%]", shortViewportClassName: "top-[47%] left-[5%]", hideOnMobile: true },
+  { id: 9, src: "/images/app_icons/legends-card-app-icon.png", alt: "Legends Card", desktopClassName: "top-[72%] left-[7%]", shortViewportClassName: "top-[64%] left-[7%]", hideOnMobile: true },
+  { id: 10, src: "/images/app_icons/secret-app-icon.png", alt: "Secret", desktopClassName: "bottom-[6%] left-[28%]", shortViewportClassName: "top-[81%] left-[5%]", hideOnMobile: true },
+  // Right column: evenly spaced down the right side
+  { id: 6, src: "/images/app_icons/jolly-app-icon.png", alt: "Jolly", desktopClassName: "top-[32%] right-[7%]", shortViewportClassName: "top-[30%] right-[7%]", mobileClassName: "bottom-[4%] right-[5%]" },
+  { id: 8, src: "/images/app_icons/freezebrew-logo.png", alt: "FreezeBrew", desktopClassName: "top-[52%] right-[5%]", shortViewportClassName: "top-[47%] right-[5%]", hideOnMobile: true },
+  { id: 11, src: "/images/app_icons/merge-app-icon.png", alt: "Merge", desktopClassName: "top-[72%] right-[7%]", shortViewportClassName: "top-[64%] right-[7%]", hideOnMobile: true },
+  { id: 12, src: "/images/app_icons/social-justice-challenge-icon.png", alt: "Social Justice Challenge", desktopClassName: "bottom-[6%] right-[28%]", shortViewportClassName: "top-[81%] right-[5%]", hideOnMobile: true },
 ];
 
 function FloatingIcon({
