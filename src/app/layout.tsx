@@ -5,11 +5,11 @@ import { Geist } from "next/font/google";
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Josh Sklar — Product & Engineering Leader",
+  title: "Josh Sklar – Product & Engineering Leader",
   description:
     "Product and engineering leader with 14+ years building and scaling consumer apps. Based in New York.",
   openGraph: {
-    title: "Josh Sklar — Product & Engineering Leader",
+    title: "Josh Sklar – Product & Engineering Leader",
     description:
       "Product and engineering leader with 14+ years building and scaling consumer apps. Based in New York.",
     images: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Josh Sklar — Product & Engineering Leader",
+    title: "Josh Sklar – Product & Engineering Leader",
     description:
       "Product and engineering leader with 14+ years building and scaling consumer apps. Based in New York.",
     images: ["/images/headshot-square.jpg"],
