@@ -18,8 +18,8 @@ interface IconData {
 const icons: IconData[] = [
   // Top row: flanking the headshot, pushed below navbar
   { id: 1, src: "/images/app_icons/stockx-app-icon.png", alt: "StockX", desktopClassName: "top-[14%] left-[8%]", mobileClassName: "top-[12%] left-[5%]" },
-  { id: 2, src: "/images/app_icons/dominos-app-icon.png", alt: "Domino's", desktopClassName: "top-[12%] left-[28%]", mobileClassName: "top-[10%] left-[38%]" },
-  { id: 3, src: "/images/app_icons/pickle-app-icon.jpeg", alt: "Pickle", desktopClassName: "top-[12%] right-[28%]", mobileClassName: "top-[12%] right-[5%]" },
+  { id: 2, src: "/images/app_icons/dominos-app-icon.png", alt: "Domino's", desktopClassName: "top-[12%] left-[28%]", shortViewportClassName: "top-[15%] left-[28%]", mobileClassName: "top-[10%] left-[38%]" },
+  { id: 3, src: "/images/app_icons/pickle-app-icon.jpeg", alt: "Pickle", desktopClassName: "top-[12%] right-[28%]", shortViewportClassName: "top-[15%] right-[28%]", mobileClassName: "top-[12%] right-[5%]" },
   { id: 4, src: "/images/app_icons/kiai-motors-app-icon.webp", alt: "KIA Motors", desktopClassName: "top-[14%] right-[8%]", mobileClassName: "bottom-[4%] left-[5%]" },
   // Left column: evenly spaced down the left side
   { id: 5, src: "/images/app_icons/cavaliers-app-icon.png", alt: "Cavaliers", desktopClassName: "top-[32%] left-[7%]", shortViewportClassName: "top-[30%] left-[7%]", mobileClassName: "bottom-[2%] left-[38%]" },
