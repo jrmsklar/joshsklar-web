@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Geist } from "next/font/google";
+import { PostHogProvider } from "@/components/posthog-provider";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -46,7 +47,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`antialiased ${geist.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen font-sans" suppressHydrationWarning>{children}</body>
+      <body className="min-h-screen font-sans" suppressHydrationWarning>
+        <PostHogProvider>{children}</PostHogProvider>
+      </body>
     </html>
   );
 }
