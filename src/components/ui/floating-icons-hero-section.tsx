@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { motion, useSpring, useMotionValue } from "motion/react";
+import { motion, useSpring, useMotionValue, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
 interface IconData {
@@ -138,6 +138,7 @@ export function FloatingIconsHero() {
   const mouseY = React.useRef(0);
   const [isMobile, setIsMobile] = React.useState(false);
   const [isShortViewport, setIsShortViewport] = React.useState(false);
+  const [showToast, setShowToast] = React.useState(false);
 
   React.useEffect(() => {
     const check = () => {
@@ -189,9 +190,38 @@ export function FloatingIconsHero() {
           />
         </div>
 
-        {/* Name badge */}
-        <div className="mt-0 inline-flex items-center rounded-full border border-[#D2D2D7]/60 bg-white/60 backdrop-blur-sm px-4 py-1.5 text-xs md:text-sm text-[--color-foreground] font-medium tracking-wide">
-          Josh Sklar
+        {/* Name badge + toast */}
+        <div className="relative inline-flex flex-col items-center">
+          <button
+            onClick={() => {
+              setShowToast(true);
+              setTimeout(() => setShowToast(false), 3000);
+            }}
+            className="mt-0 inline-flex items-center rounded-full border border-[#D2D2D7]/60 bg-white/60 backdrop-blur-sm px-4 py-1.5 text-xs md:text-sm text-[--color-foreground] font-medium tracking-wide cursor-pointer hover:bg-white/80 transition-colors"
+          >
+            Josh Sklar
+          </button>
+
+          {/* Toast */}
+          <AnimatePresence>
+            {showToast && (
+              <motion.div
+                initial={{ opacity: 0, y: 4, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="absolute bottom-full mb-2 z-50"
+              >
+                <a
+                  href="#contact"
+                  onClick={() => setShowToast(false)}
+                  className="inline-flex items-center gap-1 rounded-full bg-neutral-800 text-white px-4 py-1.5 text-xs font-medium shadow-lg hover:bg-neutral-700 transition-colors whitespace-nowrap"
+                >
+                  Contact Josh &rarr;
+                </a>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Headline */}
@@ -223,6 +253,7 @@ export function FloatingIconsHero() {
           </a>
         </div>
       </div>
+
     </section>
   );
 }
