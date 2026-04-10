@@ -178,7 +178,7 @@ export function FloatingIconsHero() {
       {/* Center content */}
       <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
         {/* Circular headshot */}
-        <div className="mx-auto w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden mb-8 ring-4 ring-[#D2D2D7]/50 shadow-xl">
+        <div className="mx-auto w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden mb-6 ring-4 ring-[#D2D2D7]/50 shadow-xl">
           <Image
             src="/images/headshot-square.jpg"
             alt="Josh Sklar"
@@ -189,19 +189,19 @@ export function FloatingIconsHero() {
           />
         </div>
 
-        {/* Gradient title */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-[--color-foreground]">
+        {/* Name badge */}
+        <div className="mt-0 inline-flex items-center rounded-full border border-[#D2D2D7]/60 bg-white/60 backdrop-blur-sm px-4 py-1.5 text-xs md:text-sm text-[--color-foreground] font-medium tracking-wide">
           Josh Sklar
-        </h1>
+        </div>
 
-        {/* Subtitle */}
-        <p className="mt-6 text-lg md:text-xl text-[--color-muted] leading-relaxed max-w-xl mx-auto">
+        {/* Headline */}
+        <h1 className="mt-4 text-xl md:text-2xl lg:text-3xl font-normal tracking-tight text-[--color-foreground] leading-snug max-w-xl mx-auto">
           Product and engineering leader. Passionate about people-first
           culture. 14+ years of building and scaling consumer apps.
-        </p>
+        </h1>
 
         {/* Body text */}
-        <p className="mt-4 text-base text-[--color-foreground] leading-relaxed max-w-lg mx-auto">
+        <p className="mt-4 text-sm md:text-base text-[--color-muted] leading-relaxed max-w-lg mx-auto">
           I&rsquo;ve spent my career helping companies build things people
           actually use, from the early days of a scrappy startup to
           shipping products at scale. I&rsquo;m based in New York.
