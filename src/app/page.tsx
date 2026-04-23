@@ -7,7 +7,6 @@ import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { NavBar } from "@/components/ui/tube-light-navbar";
 import { FloatingIconsHero } from "@/components/ui/floating-icons-hero-section";
 import { Counter } from "@/components/ui/animated-counter";
-import { Home as HomeIcon, User, Briefcase, PenLine, Mail, Sparkles } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
 /*  Intersection Observer hook for fade-up                            */
@@ -53,12 +52,12 @@ function FadeUp({
 /*  Nav items for tube light navbar                                    */
 /* ------------------------------------------------------------------ */
 const navItems = [
-  { name: "Josh", url: "#hero", icon: HomeIcon },
-  { name: "About", url: "#about", icon: User },
-  { name: "Career", url: "#career", icon: Briefcase },
-  { name: "Writing", url: "#writing", icon: PenLine },
-  { name: "Coaching", url: "#coaching", icon: Sparkles },
-  { name: "Contact", url: "#contact", icon: Mail },
+  { name: "Josh", url: "#hero" },
+  { name: "About", url: "#about" },
+  { name: "Career", url: "#career" },
+  { name: "Writing", url: "#writing" },
+  { name: "Coaching", url: "#coaching" },
+  { name: "Contact", url: "#contact" },
 ];
 
 /* ------------------------------------------------------------------ */

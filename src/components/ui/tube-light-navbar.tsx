@@ -1,13 +1,11 @@
 "use client"
 import React, { useEffect, useState, useCallback } from "react"
 import { motion } from "framer-motion"
-import { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface NavItem {
     name: string
     url: string
-    icon: LucideIcon
 }
 
 interface NavBarProps {
@@ -76,7 +74,6 @@ export function NavBar({ items, className }: NavBarProps) {
         >
             <div className="flex items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
                 {items.map((item) => {
-                    const Icon = item.icon
                     const isActive = activeTab === item.name
 
                     return (
