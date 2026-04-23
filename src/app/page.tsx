@@ -240,7 +240,7 @@ function Career() {
     >
       <FadeUp>
         <div className="max-w-3xl mx-auto px-6">
-          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-2">
+          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-8">
             Career
           </p>
           <p className="text-base text-[--color-muted] mb-12">
@@ -438,7 +438,7 @@ function Writing() {
     >
       <FadeUp>
         <div className="max-w-3xl mx-auto px-6">
-          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-2">
+          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-8">
             Writing
           </p>
           <p className="text-base text-[--color-muted] mb-12">
