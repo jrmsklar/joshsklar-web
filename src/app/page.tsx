@@ -57,7 +57,6 @@ const navItems = [
   { name: "Career", url: "#career" },
   { name: "Writing", url: "#writing" },
   { name: "Coaching", url: "#coaching" },
-  { name: "Contact", url: "#contact" },
 ];
 
 /* ------------------------------------------------------------------ */
