@@ -7,7 +7,7 @@ import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { NavBar } from "@/components/ui/tube-light-navbar";
 import { FloatingIconsHero } from "@/components/ui/floating-icons-hero-section";
 import { Counter } from "@/components/ui/animated-counter";
-import { Home as HomeIcon, User, Briefcase, PenLine, Mail } from "lucide-react";
+import { Home as HomeIcon, User, Briefcase, PenLine, Mail, Sparkles } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
 /*  Intersection Observer hook for fade-up                            */
@@ -57,6 +57,7 @@ const navItems = [
   { name: "About", url: "#about", icon: User },
   { name: "Career", url: "#career", icon: Briefcase },
   { name: "Writing", url: "#writing", icon: PenLine },
+  { name: "Coaching", url: "#coaching", icon: Sparkles },
   { name: "Contact", url: "#contact", icon: Mail },
 ];
 
@@ -545,6 +546,44 @@ function Writing() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Section 7.5 — Coaching                                            */
+/* ------------------------------------------------------------------ */
+function Coaching() {
+  return (
+    <section
+      id="coaching"
+      className="py-28 md:py-36 border-t border-[--color-divider]"
+    >
+      <FadeUp>
+        <div className="max-w-3xl mx-auto px-6">
+          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-8">
+            Coaching
+          </p>
+          <div className="space-y-5 text-base leading-relaxed text-[--color-foreground] mb-8 max-w-2xl">
+            <p>
+              I offer 1:1 coaching for product and engineering leaders – whether
+              you&rsquo;re stepping into your first management role, navigating a
+              tough team dynamic, or trying to grow in leadership. I
+              draw on 14+ years of building and leading teams
+              to help you think clearly and and lead with care.
+            </p>
+            <p>
+              Mentoring has been one of the most meaningful parts of my career – watching the people I&rsquo;ve worked with grow into leaders themselves is what keeps me doing this.
+            </p>
+          </div>
+          <a
+            href="mailto:josh@joshsklar.com?subject=Coaching%20inquiry"
+            className="inline-flex items-center gap-1 text-[--color-accent] text-sm hover:underline"
+          >
+            Email me to get started &rarr;
+          </a>
+        </div>
+      </FadeUp>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Section 8 — Contact / Footer                                      */
 /* ------------------------------------------------------------------ */
 function Contact() {
@@ -564,10 +603,10 @@ function Contact() {
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm">
             <a
-              href="mailto:jrmsklar@gmail.com"
+              href="mailto:josh@joshsklar.com"
               className="text-white hover:text-[--color-accent] transition-colors"
             >
-              jrmsklar@gmail.com
+              josh@joshsklar.com
             </a>
             <span className="hidden sm:inline text-white/30">&middot;</span>
             <a
@@ -603,6 +642,7 @@ export default function HomePage() {
         <Career />
         <Testimonials />
         <Writing />
+        <Coaching />
 
       </main>
       <Contact />
