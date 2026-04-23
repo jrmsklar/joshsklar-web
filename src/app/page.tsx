@@ -566,7 +566,8 @@ function Coaching() {
               to help you think clearly and and lead with care.
             </p>
             <p>
-              Mentoring has been one of the most meaningful parts of my career – watching the people I&rsquo;ve worked with grow into leaders themselves is what keeps me doing this.
+              Mentoring has been one of the most meaningful parts of my career. Watching the people I&rsquo;ve 
+              worked with grow into leaders themselves is what makes me the most energized.
             </p>
           </div>
           <a
