@@ -1,0 +1,1744 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Kindred · Supply & Inventory · PM Take-Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Kindred uses an editorial serif for headlines and a clean sans for body.
+     Fraunces (high-contrast, soft) + Inter is a faithful approximation. -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f3ede1;          /* page background, matches Kindred's warm off-white */
+    --cream-2: #ebe3d2;        /* alt panel */
+    --paper: #ffffff;
+    --ink: #1a1410;            /* near-black warm */
+    --ink-2: #3d3530;          /* secondary text */
+    --brown: #3a2818;          /* footer brown from livekindred.com */
+    --brown-2: #2a1c10;
+    --gold: #c8a574;           /* warm accent */
+    --green: #4f7a5a;
+    --rust: #b85a3c;
+    --line: #d8cfba;
+    --shadow: 0 24px 60px -20px rgba(58, 40, 24, 0.22);
+    --display: "Cormorant Garamond", "Times New Roman", serif;
+    --body: "Inter", system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--body);
+    background: #2a1c10;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    padding: 40px 0;
+  }
+
+  .deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .slide {
+    width: 1200px;
+    height: 750px;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+  }
+
+  /* Slide chrome: number + section label */
+  .chrome {
+    position: absolute;
+    bottom: 28px;
+    left: 56px;
+    right: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--body);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    z-index: 5;
+  }
+  .chrome .brand { font-family: var(--display); font-weight: 500; letter-spacing: -0.01em; text-transform: none; font-size: 14px; color: var(--ink); }
+
+  /* ============ SLIDE 1: TITLE ============ */
+  .title {
+    background: var(--cream);
+    padding: 80px 80px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .title-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .title-logo {
+    font-family: var(--display);
+    font-size: 38px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .title-meta {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    line-height: 1.8;
+  }
+
+  .title-main h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 100px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .title-main h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--brown);
+  }
+  .title-main .sub {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 26px;
+    color: var(--ink-2);
+    margin-top: 28px;
+    max-width: 640px;
+    line-height: 1.4;
+  }
+
+  .title-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .title-author {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.7;
+  }
+  .title-author strong { color: var(--ink); font-weight: 600; }
+  .title-pill {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* hero image area for title */
+  .title-hero {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .title-hero::before {
+    content: "";
+    position: absolute;
+    right: -80px; top: 180px;
+    width: 480px; height: 360px;
+    background: linear-gradient(135deg, #b08a5b 0%, #7a5a3a 60%, #3a2818 100%);
+    border-radius: 4px;
+    opacity: 0.08;
+    transform: rotate(-3deg);
+  }
+  .title > * { position: relative; z-index: 1; }
+
+  /* ============ SECTION DIVIDER SLIDE ============ */
+  .section-slide {
+    background: var(--brown);
+    color: var(--cream);
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .section-slide .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+  .section-slide h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 152px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: var(--cream);
+  }
+  .section-slide h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .section-slide .section-num {
+    font-family: var(--display);
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-top: 48px;
+  }
+  .section-slide .chrome { color: rgba(243, 237, 225, 0.6); }
+  .section-slide .chrome .brand { color: var(--cream); }
+
+  /* ============ STANDARD CONTENT SLIDE ============ */
+  .content {
+    padding: 72px 80px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  h3.slide-title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 58px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px 0;
+    color: var(--ink);
+  }
+  h3.slide-title em { font-style: italic; color: var(--brown); }
+  .slide-deck {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    color: var(--ink-2);
+    margin-bottom: 40px;
+    max-width: 760px;
+    line-height: 1.4;
+  }
+
+  /* ============ GOAL SLIDE ============ */
+  .goal-slide { padding: 0; }
+  .goal-slide .goal-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+  }
+  .goal-left {
+    background: var(--cream);
+    padding: 72px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .goal-left h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 86px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .goal-left h3 em { font-style: italic; color: var(--brown); }
+  .goal-left .goal-rule {
+    width: 64px;
+    height: 1px;
+    background: var(--brown);
+    margin: 36px 0;
+  }
+  .goal-left p {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 460px;
+    margin: 0;
+  }
+  .goal-right {
+    background: var(--brown);
+    color: var(--cream);
+    padding: 72px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .goal-right .stat-row {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .goal-right .stat-block .label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .goal-right .stat-block .val {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 1.2;
+    color: var(--cream);
+    letter-spacing: -0.005em;
+  }
+  .goal-right .stat-block .val em { font-style: italic; color: var(--gold); }
+  .goal-right .stat-block .note {
+    font-size: 13px;
+    color: rgba(243, 237, 225, 0.7);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ============ IDEATE SLIDES ============ */
+  .ideate {
+    padding: 50px 64px 64px;
+  }
+  .ideate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 22px;
+  }
+  .pop-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--brown);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .ideate h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0;
+    color: var(--ink);
+    max-width: 720px;
+  }
+  .ideate h3 em { font-style: italic; color: var(--brown); }
+  .ideate .barrier {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--ink-2);
+    max-width: 380px;
+    text-align: right;
+    line-height: 1.45;
+  }
+  .ideas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-top: 18px;
+  }
+  .idea-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    max-height: 470px;
+    overflow: hidden;
+  }
+  .idea-num {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+  .idea-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .idea-rule {
+    width: 28px; height: 1px; background: var(--brown); margin-bottom: 14px;
+  }
+  .idea-section { margin-bottom: 14px; }
+  .idea-section .lbl {
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brown);
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .idea-section ul {
+    margin: 0; padding: 0; list-style: none;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .idea-section ul li {
+    padding-left: 12px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .idea-section ul li::before {
+    content: "·";
+    position: absolute; left: 2px; top: -2px;
+    color: var(--brown); font-weight: 700;
+  }
+  .idea-section p {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+
+  /* analog callout for the supply-side experience */
+  .supply-note {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--brown);
+    font-style: italic;
+    font-family: var(--display);
+  }
+  .supply-note strong { font-weight: 600; font-style: normal; font-family: var(--body); letter-spacing: 0.05em; text-transform: uppercase; font-size: 9.5px; }
+
+  /* Prominent analog callout — used on idea cards that lean on Pickle/StockX experience */
+  .analog-callout {
+    margin-top: auto;
+    background: var(--brown);
+    color: var(--cream);
+    padding: 12px 12px 11px;
+    border-radius: 8px;
+    margin-left: -22px;
+    margin-right: -22px;
+    margin-bottom: -20px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  .analog-callout .ac-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .analog-callout .ac-logos {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .analog-callout .ac-logos img {
+    width: 22px; height: 22px; border-radius: 4px;
+    display: block;
+    box-shadow: 0 0 0 1px rgba(243, 237, 225, 0.15);
+  }
+  .analog-callout .ac-label {
+    font-family: var(--body);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .analog-callout .ac-body {
+    font-family: var(--display);
+    font-size: 12px;
+    line-height: 1.45;
+    color: rgba(243, 237, 225, 0.92);
+    font-style: italic;
+  }
+  .analog-callout .ac-body strong {
+    font-style: normal;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* Inline analog tag — used on the prioritized feature slide */
+  .inline-analogs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .inline-analogs img { width: 24px; height: 24px; border-radius: 4px; box-shadow: 0 0 0 1px var(--line); }
+  .inline-analogs .lbl-text {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brown);
+    font-weight: 600;
+  }
+
+  /* ============ PRIORITIZED FEATURE SLIDE ============ */
+  .prio { padding: 60px 64px 70px; }
+  .prio-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 56px;
+    margin-top: 28px;
+  }
+  .prio-left h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  .prio-left h3 em { font-style: italic; color: var(--brown); }
+  .prio-block { margin-bottom: 22px; }
+  .prio-bullets { margin: 6px 0 0 0; padding: 0; list-style: none; }
+  .prio-bullets li {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 5px;
+  }
+  .prio-bullets li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--brown);
+  }
+  .prio-bullets li strong { color: var(--ink); font-weight: 600; }
+  .prio-analog {
+    background: var(--cream-2);
+    border-radius: 6px;
+    padding: 18px 18px 16px;
+    margin-left: -2px; margin-right: -2px;
+  }
+  .prio-analog p { margin-bottom: 8px; font-size: 13.5px; }
+  .prio-analog .prio-bullets li { font-size: 12.5px; margin-bottom: 4px; }
+  .prio-block .lbl {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brown);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .prio-block p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .prio-block p strong { color: var(--ink); }
+  .prio-right {
+    background: var(--brown);
+    color: var(--cream);
+    border-radius: 6px;
+    padding: 36px 34px;
+    align-self: stretch;
+  }
+  .prio-right .feat-tag {
+    display: inline-block;
+    padding: 5px 12px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .prio-right h4 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 32px;
+    line-height: 1.15;
+    margin: 0 0 16px;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+  }
+  .prio-right .desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: rgba(243, 237, 225, 0.85);
+    margin-bottom: 22px;
+  }
+  .prio-right .mini-list {
+    list-style: none; margin: 0; padding: 0;
+  }
+  .prio-right .mini-list li {
+    font-size: 12.5px;
+    line-height: 1.5;
+    padding: 10px 0;
+    border-top: 1px solid rgba(200, 165, 116, 0.25);
+    color: rgba(243, 237, 225, 0.9);
+    display: flex; gap: 14px;
+  }
+  .prio-right .mini-list li:first-child { border-top: none; padding-top: 0; }
+  .prio-right .mini-list .k {
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--gold);
+    flex-shrink: 0;
+    width: 80px;
+    font-size: 13px;
+  }
+
+  /* ============ PROTOTYPE SLIDES ============ */
+  .proto {
+    padding: 56px 64px 70px;
+    background: var(--cream-2);
+  }
+  .proto h3.slide-title { font-size: 44px; }
+  .phones-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 28px;
+    margin-top: 24px;
+  }
+  .phone-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .phone-step {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--brown);
+    margin-bottom: 4px;
+  }
+  .phone-cap {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .phone {
+    width: 280px;
+    height: 560px;
+    background: #fff;
+    border-radius: 36px;
+    border: 8px solid #1a1410;
+    box-shadow: 0 18px 40px -16px rgba(58, 40, 24, 0.35);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone .notch {
+    position: absolute;
+    top: 8px; left: 50%; transform: translateX(-50%);
+    width: 90px; height: 18px;
+    background: #1a1410;
+    border-radius: 12px;
+    z-index: 10;
+  }
+  .phone .status {
+    height: 38px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 22px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+  .phone-body {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-arrow {
+    align-self: center;
+    color: var(--brown);
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+  }
+
+  /* SCREEN 1: Smart Notification / Trigger */
+  .screen-trigger { padding: 16px 18px; background: var(--cream); flex: 1; display: flex; flex-direction: column; }
+  .nav-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 18px;
+  }
+  .nav-bar .logo {
+    font-family: var(--display); font-size: 17px; font-weight: 500; letter-spacing: -0.01em;
+  }
+  .nav-bar .credits {
+    font-size: 10px;
+    background: var(--brown);
+    color: var(--gold);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .smart-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .smart-card .ttl {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .smart-card .sub {
+    font-size: 11px;
+    color: var(--ink-2);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .cal-mini {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  .cal-mini .day {
+    flex: 1;
+    aspect-ratio: 1;
+    background: var(--cream-2);
+    border-radius: 4px;
+    font-size: 9px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .cal-mini .day.away { background: var(--brown); color: var(--gold); }
+  .cal-mini .day.empty { background: #fff; border: 1px dashed var(--line); color: var(--ink-2); }
+  .smart-card .legend {
+    font-size: 9.5px;
+    color: var(--ink-2);
+    line-height: 1.4;
+    display: flex; gap: 12px;
+  }
+  .smart-card .legend .sw { display: inline-block; width: 8px; height: 8px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+  .smart-card .legend .sw.away { background: var(--brown); }
+  .smart-card .legend .sw.empty { background: #fff; border: 1px dashed var(--line); }
+
+  .hero-prompt {
+    background: var(--brown);
+    color: var(--cream);
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 4px;
+  }
+  .hero-prompt .eyebrow-mini {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .hero-prompt .h {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 19px;
+    line-height: 1.18;
+    margin-bottom: 10px;
+  }
+  .hero-prompt .d {
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: rgba(243, 237, 225, 0.82);
+    margin-bottom: 12px;
+  }
+  .hero-prompt .cta {
+    background: var(--gold);
+    color: var(--brown);
+    border-radius: 999px;
+    padding: 9px 0;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .hero-prompt .cta-2 {
+    margin-top: 6px;
+    text-align: center;
+    font-size: 10px;
+    color: rgba(243, 237, 225, 0.7);
+  }
+
+  /* SCREEN 2: One-tap relist */
+  .screen-relist { padding: 16px 18px; background: var(--cream); flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .back-row { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink-2); margin-bottom: 10px; }
+  .progress { display: flex; gap: 4px; margin-bottom: 14px; }
+  .progress .dot { flex: 1; height: 3px; border-radius: 999px; background: var(--line); }
+  .progress .dot.on { background: var(--brown); }
+  .relist-h {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .relist-h em { font-style: italic; color: var(--brown); }
+  .relist-sub {
+    font-size: 11px;
+    color: var(--ink-2);
+    line-height: 1.45;
+    margin-bottom: 14px;
+  }
+  .pre-row {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pre-row .ico {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: var(--cream-2);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .pre-row .body { flex: 1; min-width: 0; }
+  .pre-row .ttl { font-size: 11.5px; font-weight: 600; color: var(--ink); margin-bottom: 1px; }
+  .pre-row .sub { font-size: 10px; color: var(--ink-2); line-height: 1.35; }
+  .pre-row .check {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--green);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+  .pre-row .edit {
+    font-size: 10px;
+    color: var(--brown);
+    text-decoration: underline;
+    flex-shrink: 0;
+  }
+  .price-mod {
+    background: var(--cream-2);
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 8px;
+  }
+  .price-mod .ttl { font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .price-mod .row { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--ink-2); margin-bottom: 3px; }
+  .price-mod .row strong { color: var(--brown); }
+
+  .pin-cta {
+    margin-top: auto;
+    background: var(--brown);
+    color: var(--cream);
+    border-radius: 999px;
+    padding: 11px 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .pin-foot {
+    text-align: center;
+    font-size: 9.5px;
+    color: var(--ink-2);
+    margin-top: 8px;
+  }
+
+  /* SCREEN 3: Confirmation */
+  .screen-conf { padding: 16px 18px; background: var(--cream); flex: 1; display: flex; flex-direction: column; }
+  .conf-hero {
+    background: linear-gradient(160deg, #4f7a5a 0%, #3a5a44 100%);
+    color: var(--cream);
+    border-radius: 14px;
+    padding: 22px 18px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .conf-hero .check-big {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 10px;
+    font-size: 22px;
+  }
+  .conf-hero .ttl {
+    font-family: var(--display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .conf-hero .sub { font-size: 11px; line-height: 1.5; color: rgba(243, 237, 225, 0.85); }
+
+  .pot-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .pot-card .lbl {
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brown);
+    margin-bottom: 6px;
+  }
+  .pot-card .credits-line {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .pot-card .now {
+    font-family: var(--display);
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .pot-card .delta {
+    font-size: 11px;
+    color: var(--green);
+    font-weight: 600;
+  }
+  .pot-card .bar { height: 6px; background: var(--cream-2); border-radius: 999px; overflow: hidden; }
+  .pot-card .bar .fill { height: 100%; background: var(--brown); width: 60%; border-radius: 999px; }
+  .pot-card .bar-cap { font-size: 10px; color: var(--ink-2); margin-top: 6px; line-height: 1.4; }
+
+  .next-card {
+    background: var(--cream-2);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .next-card .lbl { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brown); margin-bottom: 6px; }
+  .next-card .row { display: flex; gap: 10px; }
+  .next-card .thumb {
+    width: 48px; height: 48px; border-radius: 8px;
+    background: linear-gradient(135deg, #b08a5b, #5a3a20);
+    flex-shrink: 0;
+  }
+  .next-card .meta .t { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .next-card .meta .s { font-size: 10px; color: var(--ink-2); line-height: 1.4; }
+
+  /* prototype caption strip */
+  .proto-caption {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+  }
+  .proto-caption .col .n {
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--brown);
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .proto-caption .col .t {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .proto-caption .col .d {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+
+  /* prototype design notes slide */
+  .proto-notes { padding: 60px 80px 70px; }
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 24px;
+  }
+  .note-block {
+    border-left: 2px solid var(--brown);
+    padding-left: 20px;
+  }
+  .note-block .lbl {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brown);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .note-block h5 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2;
+    margin: 0 0 8px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .note-block h5 em { font-style: italic; color: var(--brown); }
+  .note-block p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .note-analog {
+    margin-top: 12px;
+    padding: 8px 10px;
+    background: var(--cream-2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+  .note-analog img { width: 22px; height: 22px; border-radius: 4px; flex-shrink: 0; box-shadow: 0 0 0 1px var(--line); }
+  .note-analog strong { color: var(--brown); font-weight: 600; }
+
+  /* closing slide */
+  .closing { padding: 80px; background: var(--brown); color: var(--cream); display: flex; flex-direction: column; justify-content: space-between; }
+  .closing h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 92px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .closing h3 em { font-style: italic; color: var(--gold); }
+  .closing p {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    color: rgba(243, 237, 225, 0.8);
+    max-width: 600px;
+    margin-top: 32px;
+    line-height: 1.5;
+  }
+  .closing .sig {
+    font-size: 12px;
+    color: rgba(243, 237, 225, 0.6);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ========== SLIDE 1 — TITLE ========== -->
+  <section class="slide title">
+    <div class="title-hero"></div>
+    <div class="title-top">
+      <div class="title-logo">Kindred</div>
+      <div class="title-meta">
+        Staff PM<br/>
+        Take-Home Submission
+      </div>
+    </div>
+
+    <div class="title-main">
+      <h1>Unlocking<br/><em>hosting supply.</em></h1>
+      <div class="sub">A product strategy for activating Kindred members to open their homes, and to do it again, and again.</div>
+    </div>
+
+    <div class="title-bottom">
+      <div class="title-author">
+        <strong>Josh Sklar</strong>
+      </div>
+      <div class="title-pill">Three Acts · Ideate · Prioritize · Prototype</div>
+    </div>
+
+    <div class="chrome">
+      <span></span>
+      <span>01</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 2 — SECTION: GOALS ========== -->
+  <section class="slide section-slide">
+    <div class="eyebrow">Section One</div>
+    <h2><em>Goals.</em></h2>
+    <div class="section-num">I.</div>
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>02 · Goals</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 3 — GOAL ========== -->
+  <section class="slide goal-slide">
+    <div class="goal-inner">
+      <div class="goal-left">
+        <h3>Activate more members<br/>to open their<br/><em>home to host.</em></h3>
+        <div class="goal-rule"></div>
+        <p>Every credit earned is supply unlocked, and a future trip funded for someone else in the network.</p>
+      </div>
+      <div class="goal-right">
+        <div class="stat-row">
+          <div class="stat-block">
+            <div class="label">The opportunity</div>
+            <div class="val"><em>300K+</em> members. Demand is healthy. Hosting supply is the gap.</div>
+            <div class="note">In a closed-loop credit system, every host activation grows both sides of the marketplace at once.</div>
+          </div>
+          <div class="stat-block">
+            <div class="label">The challenge</div>
+            <div class="val">Activation, not <em>awareness.</em></div>
+            <div class="note">Members already understand the value. The leap is emotional and logistical, not informational.</div>
+          </div>
+          <div class="stat-block">
+            <div class="label">The bet</div>
+            <div class="val">Reduce friction. Make hosting <em>feel inevitable.</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>03 · Goals</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 4 — SECTION: IDEATE ========== -->
+  <section class="slide section-slide">
+    <div class="eyebrow">Section Two</div>
+    <h2><em>Ideate.</em></h2>
+    <div class="section-num">II.</div>
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>04 · Ideate</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 5 — POPULATION 1 ========== -->
+  <section class="slide ideate">
+    <div class="ideate-header">
+      <div>
+        <div class="pop-tag">Population 01 · Never hosted</div>
+        <h3>Make the leap feel <em>smaller and safer.</em></h3>
+      </div>
+      <div class="barrier">
+        Barrier: emotional and practical. "Is my home good enough? Can I trust this person? Is the logistics manageable?"
+      </div>
+    </div>
+
+    <div class="ideas-grid">
+      <!-- Idea 1 -->
+      <div class="idea-card">
+        <div class="idea-num">Idea 01</div>
+        <div class="idea-name">"List my home for me": concierge onboarding</div>
+        <div class="idea-rule"></div>
+        <div class="idea-section">
+          <div class="lbl">Belief to shift</div>
+          <p>"My home isn't ready / I don't have time to set it up."</p>
+        </div>
+        <div class="idea-section">
+          <div class="lbl">How it works</div>
+          <ul>
+            <li>Member shares an iCloud / Google Photos album of their home</li>
+            <li>Kindred writes the listing, sets pricing, builds the calendar</li>
+            <li>Member approves with one tap — never sees a blank form</li>
+          </ul>
+        </div>
+        <div class="analog-callout">
+          <div class="ac-head">
+            <div class="ac-logos">
+              <img src="/images/app_icons/pickle-app-icon.jpeg" alt="Pickle" style="width:22px;height:22px;border-radius:4px;display:block;box-shadow:0 0 0 1px rgba(243, 237, 225, 0.15);" />
+            </div>
+            <div class="ac-label">Done this before · Pickle</div>
+          </div>
+          <div class="ac-body">At <strong>Pickle</strong>, we manually listed influencers' inventory from shared iCloud albums. They sent photos, we did everything else. Removed supplier friction. The bottleneck was effort, not intent.</div>
+        </div>
+      </div>
+
+      <!-- Idea 2 -->
+      <div class="idea-card">
+        <div class="idea-num">Idea 02</div>
+        <div class="idea-name">"Match before you commit": see your guest first</div>
+        <div class="idea-rule"></div>
+        <div class="idea-section">
+          <div class="lbl">Belief to shift</div>
+          <p>"I can't trust a stranger in my home — but I might trust this specific person."</p>
+        </div>
+        <div class="idea-section">
+          <div class="lbl">How it works</div>
+          <ul>
+            <li>Pre-listing: member sees real, vetted profiles of likely guests for their dates &amp; home</li>
+            <li>Member toggles availability "on" only after seeing who's interested</li>
+            <li>Trust is anchored to a face, not an abstraction</li>
+          </ul>
+        </div>
+        <div class="supply-note">
+          <strong>Insight</strong><br/>
+          Trust scales through specificity. The leap is smaller when you're saying yes to <em>Sarah from Brooklyn</em>, not "the internet."
+        </div>
+      </div>
+
+      <!-- Idea 3 -->
+      <div class="idea-card">
+        <div class="idea-num">Idea 03</div>
+        <div class="idea-name">"Dip a toe": host a single weekend, locally</div>
+        <div class="idea-rule"></div>
+        <div class="idea-section">
+          <div class="lbl">Belief to shift</div>
+          <p>"Hosting is a big, scary, all-or-nothing commitment."</p>
+        </div>
+        <div class="idea-section">
+          <div class="lbl">How it works</div>
+          <ul>
+            <li>Offer a 2–3 night "starter swap" with a vetted member nearby</li>
+            <li>Both stay in town — easy to drive back if something feels off</li>
+            <li>Pairs with hand-holding from a Kindred concierge</li>
+          </ul>
+        </div>
+        <div class="supply-note">
+          <strong>Why it works</strong><br/>
+          Lowers stakes from "trip with strangers" to "trial run." The first host event is the unlock. Once it happens, behavior cascades.
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>05 · Ideate · Pop 01</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 6 — POPULATION 2 ========== -->
+  <section class="slide ideate">
+    <div class="ideate-header">
+      <div>
+        <div class="pop-tag">Population 02 · Traveled, never hosted</div>
+        <h3>Close the loop. <em>Convert reciprocity into action.</em></h3>
+      </div>
+      <div class="barrier">
+        Barrier: gratitude and inertia. They've felt the value. Hosting back hasn't been concrete or easy enough, yet.
+      </div>
+    </div>
+
+    <div class="ideas-grid">
+      <!-- Idea 1 -->
+      <div class="idea-card">
+        <div class="idea-num">Idea 01</div>
+        <div class="idea-name">"Pay it forward": your host's next trip</div>
+        <div class="idea-rule"></div>
+        <div class="idea-section">
+          <div class="lbl">Belief to shift</div>
+          <p>"I owe Kindred" becomes "I owe <em>this person</em>."</p>
+        </div>
+        <div class="idea-section">
+          <div class="lbl">How it works</div>
+          <ul>
+            <li>Post-trip: show the host who hosted them, and where that host wants to travel next</li>
+            <li>"Open your home for 5 nights and Maya can take her trip to Lisbon"</li>
+            <li>Concrete reciprocity beats abstract obligation</li>
+          </ul>
+        </div>
+        <div class="supply-note">
+          <strong>Why it works</strong><br/>
+          Specific, named gratitude is one of the strongest levers in human behavior. Loose "give back to the community" framings underperform it consistently.
+        </div>
+      </div>
+
+      <!-- Idea 2 -->
+      <div class="idea-card">
+        <div class="idea-num">Idea 02</div>
+        <div class="idea-name">"You've already done it": guest-as-host inversion</div>
+        <div class="idea-rule"></div>
+        <div class="idea-section">
+          <div class="lbl">Belief to shift</div>
+          <p>"Hosting feels different / scarier than being a guest."</p>
+        </div>
+        <div class="idea-section">
+          <div class="lbl">How it works</div>
+          <ul>
+            <li>Replay the trust they extended as a guest in a quick post-trip moment</li>
+            <li>Show their host's review of <em>them</em>: proof they were trusted, too</li>
+            <li>Reframe: "You've already been through the hardest part, trusting"</li>
+          </ul>
+        </div>
+        <div class="supply-note">
+          <strong>Insight</strong><br/>
+          The most powerful trust signal isn't a Kindred badge. It's the receipt of trust they themselves received and honored.
+        </div>
+      </div>
+
+      <!-- Idea 3 -->
+      <div class="idea-card">
+        <div class="idea-num">Idea 03</div>
+        <div class="idea-name">"List my home with help" concierge upgrade</div>
+        <div class="idea-rule"></div>
+        <div class="idea-section">
+          <div class="lbl">Belief to shift</div>
+          <p>"I would host, but setting it up feels like work I haven't gotten to yet."</p>
+        </div>
+        <div class="idea-section">
+          <div class="lbl">How it works</div>
+          <ul>
+            <li>Free white-glove onboarding for members who already traveled</li>
+            <li>30-min call with a Kindred host coach plus an in-home photographer</li>
+            <li>Listing is built and ready to go live by the end of the week</li>
+          </ul>
+        </div>
+        <div class="supply-note">
+          <strong>Why it works</strong><br/>
+          Pop 02 has the trust. They lack the activation energy. A small high-touch investment from Kindred turns latent intent into actual supply, especially for higher-value urban homes.
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>06 · Ideate · Pop 02</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 7 — POPULATION 3 ========== -->
+  <section class="slide ideate">
+    <div class="ideate-header">
+      <div>
+        <div class="pop-tag">Population 03 · Hosted before, could do more</div>
+        <h3>Remove friction. <em>Make repeat hosting effortless.</em></h3>
+      </div>
+      <div class="barrier">
+        Barrier: marginal effort and diminishing return. The experience is already good, but the credit ceiling looms and re-prep is a chore.
+      </div>
+    </div>
+
+    <div class="ideas-grid">
+      <!-- Idea 1 -->
+      <div class="idea-card">
+        <div class="idea-num">Idea 01</div>
+        <div class="idea-name">Calendar-aware "list it again" prompts</div>
+        <div class="idea-rule"></div>
+        <div class="idea-section">
+          <div class="lbl">Belief to shift</div>
+          <p>"I'd host again if I happened to remember while I'm leaving town."</p>
+        </div>
+        <div class="idea-section">
+          <div class="lbl">How it works</div>
+          <ul>
+            <li>Detect upcoming travel via Kindred bookings, calendar sync, or flight email parsing</li>
+            <li>Surface a one-tap "open your home Apr 12 to 18" prompt</li>
+            <li>Pre-fills last listing's photos, pricing, and instructions. Member edits anything if needed</li>
+          </ul>
+        </div>
+        <div class="analog-callout">
+          <div class="ac-head">
+            <div class="ac-logos">
+              <img src="/images/app_icons/pickle-app-icon.jpeg" alt="Pickle" style="width:22px;height:22px;border-radius:4px;display:block;box-shadow:0 0 0 1px rgba(243, 237, 225, 0.15);" />
+            </div>
+            <div class="ac-label">Done this before · Pickle</div>
+          </div>
+          <div class="ac-body">At <strong>Pickle</strong>, we prompted suppliers for availability whenever they were heading out, then updated their listings automatically. Same pattern: catch supply at the moment of decision, don't re-sell the concept.</div>
+        </div>
+      </div>
+
+      <!-- Idea 2 -->
+      <div class="idea-card">
+        <div class="idea-num">Idea 02</div>
+        <div class="idea-name">Credit gifting and group travel pools</div>
+        <div class="idea-rule"></div>
+        <div class="idea-section">
+          <div class="lbl">Belief to shift</div>
+          <p>"I'm hitting my credit ceiling. Why earn more I'll never use?"</p>
+        </div>
+        <div class="idea-section">
+          <div class="lbl">How it works</div>
+          <ul>
+            <li>Let prolific hosts gift credits to family members or invited friends</li>
+            <li>Create shared "travel pools" for couples, families, friend groups</li>
+            <li>Refer-a-friend who hosts unlocks shared credits</li>
+          </ul>
+        </div>
+        <div class="supply-note">
+          <strong>Why it works</strong><br/>
+          Releases the credit ceiling and converts saturated supply-side users into <em>two-sided ambassadors</em>. New, vetted hosts come in through existing trusted ones.
+        </div>
+      </div>
+
+      <!-- Idea 3 -->
+      <div class="idea-card">
+        <div class="idea-num">Idea 03</div>
+        <div class="idea-name">"You're not home tonight": geo-aware push nudges</div>
+        <div class="idea-rule"></div>
+        <div class="idea-section">
+          <div class="lbl">Belief to shift</div>
+          <p>"I forget to list, even when I'm out of town and could be earning."</p>
+        </div>
+        <div class="idea-section">
+          <div class="lbl">How it works</div>
+          <ul>
+            <li>Detect when the user has been outside their hometown for 1+ nights (with permission)</li>
+            <li>Push notification: "Still in NYC tonight? Open your home in Brooklyn."</li>
+            <li>One tap to list with last-used settings. Pricing, photos, and manual all pre-filled</li>
+          </ul>
+        </div>
+        <div class="supply-note">
+          <strong>Insight</strong><br/>
+          The friction isn't capability. It's <em>recall</em>. Every night a repeat host is unexpectedly away is a missed credit. Surface the prompt at the moment of opportunity.
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>07 · Ideate · Pop 03</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 8 — SECTION: PRIORITIZED FEATURE ========== -->
+  <section class="slide section-slide">
+    <div class="eyebrow">Section Three</div>
+    <h2><em>Prioritized<br/>Feature.</em></h2>
+    <div class="section-num">III.</div>
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>08 · Prioritized Feature</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 9 — WHY POPULATION 3 ========== -->
+  <section class="slide content prio">
+    <div class="eyebrow">Why Population 03 first</div>
+    <h3 class="slide-title">The cheapest unit of <em>new supply</em> is a member who has already said yes once.</h3>
+
+    <div class="prio-grid">
+      <div class="prio-left">
+        <div class="prio-block">
+          <div class="lbl">Why Pop 03</div>
+          <ul class="prio-bullets">
+            <li>Already past the trust chasm. Hosted at least once</li>
+            <li>High satisfaction means behavior, not belief, is the gap</li>
+            <li>Near-zero CAC to re-activate vs. Pop 01 and 02</li>
+            <li>Every new listing also signals social proof to Pop 01 and 02</li>
+          </ul>
+        </div>
+
+        <div class="prio-block prio-analog">
+          <div class="inline-analogs">
+            <img src="/images/app_icons/pickle-app-icon.jpeg" alt="Pickle" />
+            <img src="/images/app_icons/stockx-app-icon.png" alt="StockX" />
+            <span class="lbl-text">Pattern I've seen before</span>
+          </div>
+          <p><strong>Marketplaces compound from supply, not demand.</strong></p>
+          <ul class="prio-bullets">
+            <li><strong>Pickle</strong>: hand-held suppliers. Listed inventory from shared iCloud albums</li>
+            <li><strong>StockX</strong>: sourced products from eBay and cross-listed to seed inventory</li>
+            <li>Both: remove supplier effort, don't amplify demand</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prio-right">
+        <div class="feat-tag">Feature pick</div>
+        <h4>Calendar-aware<br/>"list it again" prompts.</h4>
+        <div class="desc">Catch repeat hosts at the moment of decision, when they're already leaving town anyway. Pre-fill everything they decided last time. Make saying yes a single tap.</div>
+        <ul class="mini-list">
+          <li><span class="k">Trigger</span><span>Detected travel: Kindred booking, calendar sync, or flight confirmation email</span></li>
+          <li><span class="k">Friction</span><span>One tap to confirm. Photos, pricing, and manual all pre-filled from last listing</span></li>
+          <li><span class="k">Outcome</span><span>Marginal listing effort drops from ~20 min to ~20 seconds</span></li>
+          <li><span class="k">Why this one</span><span>Highest leverage, lowest build cost. Existing users, existing flow, additive. No behavior reframe required</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>09 · Prioritized Feature</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 10 — SECTION: PROTOTYPE ========== -->
+  <section class="slide section-slide">
+    <div class="eyebrow">Section Four</div>
+    <h2><em>Prototype.</em></h2>
+    <div class="section-num">IV.</div>
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>10 · Prototype</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 11 — PROTOTYPE FLOW ========== -->
+  <section class="slide proto">
+    <div class="eyebrow">Prototype · Mobile flow</div>
+    <h3 class="slide-title">"Your home will be empty <em>April 12 to 18."</em></h3>
+    <div class="slide-deck">A three-screen flow that turns an upcoming trip into hosting supply with one tap.</div>
+
+    <div class="phones-row">
+
+      <!-- ============ PHONE 1: TRIGGER ============ -->
+      <div class="phone-col">
+        <div class="phone-step">Step 01 · Detect</div>
+        <div class="phone-cap">Smart prompt on home tab</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="status">
+            <span>9:41</span>
+            <span>● ● ●</span>
+          </div>
+          <div class="phone-body">
+            <div class="screen-trigger">
+              <div class="nav-bar">
+                <div class="logo">Kindred</div>
+                <div class="credits">12 credits</div>
+              </div>
+
+              <div class="smart-card">
+                <div class="ttl">Heading to Tokyo soon?</div>
+                <div class="sub">We noticed your trip Apr 12 to 18. Your home would otherwise sit empty.</div>
+                <div class="cal-mini">
+                  <div class="day">10</div>
+                  <div class="day">11</div>
+                  <div class="day empty">12</div>
+                  <div class="day empty">13</div>
+                  <div class="day empty">14</div>
+                  <div class="day empty">15</div>
+                  <div class="day empty">16</div>
+                </div>
+                <div class="legend">
+                  <span><span class="sw empty"></span>Empty &amp; available</span>
+                  <span><span class="sw away"></span>You're away</span>
+                </div>
+              </div>
+
+              <div class="hero-prompt">
+                <div class="eyebrow-mini">One tap to host</div>
+                <div class="h">"List it again, same as last time?"</div>
+                <div class="d">Photos, pricing, house manual, and instructions. All pre-filled from your last listing in November. You can edit anything.</div>
+                <div class="cta">Yes, list April 12 to 18</div>
+                <div class="cta-2">Adjust details first</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-arrow">→</div>
+
+      <!-- ============ PHONE 2: REVIEW & RELIST ============ -->
+      <div class="phone-col">
+        <div class="phone-step">Step 02 · Confirm</div>
+        <div class="phone-cap">Review pre-filled listing</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="status">
+            <span>9:41</span>
+            <span>● ● ●</span>
+          </div>
+          <div class="phone-body">
+            <div class="screen-relist">
+              <div class="back-row">← <span>Apr 12 to Apr 18 · 6 nights</span></div>
+              <div class="progress">
+                <div class="dot on"></div><div class="dot on"></div><div class="dot"></div>
+              </div>
+              <div class="relist-h">Same as <em>last time?</em></div>
+              <div class="relist-sub">Everything from your November listing is ready. Tap to edit anything.</div>
+
+              <div class="pre-row">
+                <div class="ico">📸</div>
+                <div class="body">
+                  <div class="ttl">12 photos</div>
+                  <div class="sub">From last listing · last verified Nov 4</div>
+                </div>
+                <div class="check">✓</div>
+              </div>
+              <div class="pre-row">
+                <div class="ico">📖</div>
+                <div class="body">
+                  <div class="ttl">House manual</div>
+                  <div class="sub">Wifi, plant care, neighborhood guide</div>
+                </div>
+                <div class="edit">Edit</div>
+              </div>
+              <div class="pre-row">
+                <div class="ico">🛏</div>
+                <div class="body">
+                  <div class="ttl">Cleaning &amp; turnover</div>
+                  <div class="sub">Coordinated by Kindred · same vendor</div>
+                </div>
+                <div class="check">✓</div>
+              </div>
+
+              <div class="price-mod">
+                <div class="ttl">You'll earn</div>
+                <div class="row"><span>6 nights hosted</span><strong>+6 credits</strong></div>
+                <div class="row"><span>Trip funded toward Tokyo</span><strong>5 of 7 nights ✓</strong></div>
+              </div>
+
+              <div class="pin-cta">Confirm &amp; list</div>
+              <div class="pin-foot">You'll approve every booking request</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-arrow">→</div>
+
+      <!-- ============ PHONE 3: CONFIRMATION ============ -->
+      <div class="phone-col">
+        <div class="phone-step">Step 03 · Convert</div>
+        <div class="phone-cap">Listed. Earnings → next trip</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="status">
+            <span>9:41</span>
+            <span>● ● ●</span>
+          </div>
+          <div class="phone-body">
+            <div class="screen-conf">
+              <div class="conf-hero">
+                <div class="check-big">✓</div>
+                <div class="ttl">Your home is live<br/>for Apr 12–18.</div>
+                <div class="sub">We'll send you matched guest requests. You approve every one.</div>
+              </div>
+
+              <div class="pot-card">
+                <div class="lbl">If you host all 6 nights</div>
+                <div class="credits-line">
+                  <div class="now">18 credits</div>
+                  <div class="delta">+6 earned</div>
+                </div>
+                <div class="bar"><div class="fill"></div></div>
+                <div class="bar-cap">Funds 5 of 7 nights toward your saved Tokyo trip in May.</div>
+              </div>
+
+              <div class="next-card">
+                <div class="lbl">Toward your wishlist</div>
+                <div class="row">
+                  <div class="thumb"></div>
+                  <div class="meta">
+                    <div class="t">Yuko's loft · Shibuya</div>
+                    <div class="s">7 nights · Mid-May · From your saved homes</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>11 · Prototype Flow</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 12 — KEY DESIGN DECISIONS ========== -->
+  <section class="slide content proto-notes">
+    <div class="eyebrow">Prototype · Key decisions</div>
+    <h3 class="slide-title">Four design decisions, and <em>why.</em></h3>
+
+    <div class="notes-grid">
+      <div class="note-block">
+        <div class="lbl">Decision 01</div>
+        <h5>Trigger off detected travel, <em>not a generic nudge.</em></h5>
+        <p>Generic "host more!" prompts get ignored. Specific ones, like "you'll be in Tokyo," feel like Kindred is paying attention.</p>
+        <div class="note-analog">
+          <img src="/images/app_icons/stockx-app-icon.png" alt="StockX" />
+          <span>Same logic as <strong>StockX</strong>: meet supply where it exists, don't manufacture it.</span>
+        </div>
+      </div>
+
+      <div class="note-block">
+        <div class="lbl">Decision 02</div>
+        <h5>Default to <em>one tap.</em> Never a blank form.</h5>
+        <p>Repeat hosts already made every key decision last time. The prototype pre-fills everything (photos, pricing, manual) and lets them edit if they want.</p>
+        <div class="note-analog">
+          <img src="/images/app_icons/pickle-app-icon.jpeg" alt="Pickle" />
+          <span>Same playbook as <strong>Pickle</strong>: the supplier had intent. We removed effort.</span>
+        </div>
+      </div>
+
+      <div class="note-block">
+        <div class="lbl">Decision 03</div>
+        <h5>Frame earnings <em>concretely</em>, not abstractly.</h5>
+        <p>"+6 credits" is forgettable. "Funds 5 of 7 nights toward your Tokyo trip in May" is unforgettable. Tying hosting output to the user's own saved wishlist closes the loop visibly and makes the marketplace logic feel personal.</p>
+      </div>
+
+      <div class="note-block">
+        <div class="lbl">Decision 04</div>
+        <h5>Preserve agency throughout. <em>Always.</em></h5>
+        <p>Every screen reminds the host they approve every booking. Trust is the central currency at Kindred. Speed and convenience can never read as "automation taking over your home." Editable defaults, not silent ones.</p>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <span class="brand">Kindred</span>
+      <span>12 · Prototype · Decisions</span>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 13 — CLOSE ========== -->
+  <section class="slide closing">
+    <div>
+      <h3>Thank you,<br/><em>Josh.</em></h3>
+      <p>Excited to keep building this with you. These are exactly the kinds of marketplace problems I love working on.</p>
+    </div>
+    <div class="sig">Josh · Take-home submission · Supply &amp; Inventory</div>
+    <div class="chrome">
+      <span class="brand" style="color: var(--cream)">Kindred</span>
+      <span style="color: rgba(243, 237, 225, 0.6)">13 · Close</span>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
