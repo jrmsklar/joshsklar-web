@@ -10,25 +10,21 @@ export default function KindredPage() {
   const [authed, setAuthed] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    // Restore auth state from sessionStorage
+    // Always require password on page load — clear any stale cookie/session.
     if (typeof window !== "undefined") {
-      const stored = sessionStorage.getItem(STORAGE_KEY);
-      if (stored === "yes") {
-        setAuthed(true);
-      }
-      setChecking(false);
+      document.cookie = `${COOKIE_NAME}=; path=/; max-age=0; SameSite=Lax`;
+      sessionStorage.removeItem(STORAGE_KEY);
     }
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === PASSWORD) {
-      // Set cookie so the proxy lets /kindred-deck.html through
-      document.cookie = `${COOKIE_NAME}=yes; path=/; max-age=86400; SameSite=Lax`;
-      sessionStorage.setItem(STORAGE_KEY, "yes");
+      // Session cookie (no max-age) so it dies with the tab; the page-load
+      // effect above also clears it on refresh.
+      document.cookie = `${COOKIE_NAME}=yes; path=/; SameSite=Lax`;
       setAuthed(true);
       setError("");
     } else {
@@ -36,10 +32,6 @@ export default function KindredPage() {
       setPassword("");
     }
   };
-
-  if (checking) {
-    return null;
-  }
 
   if (authed) {
     return (
@@ -83,7 +75,7 @@ export default function KindredPage() {
           />
           <button
             type="submit"
-            className="w-full px-4 py-2.5 rounded-full bg-[--color-foreground] text-white text-sm font-medium hover:opacity-90 transition-opacity"
+            className="w-full px-4 py-2.5 rounded-full bg-[#1D1D1F] text-white text-sm font-medium hover:opacity-90 transition-opacity"
           >
             View deck
           </button>
