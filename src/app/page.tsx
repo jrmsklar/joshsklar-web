@@ -571,10 +571,10 @@ function Coaching() {
             </p>
           </div>
           <a
-            href="mailto:josh@joshsklar.com?subject=Coaching%20inquiry"
+            href="#contact"
             className="inline-flex items-center gap-1 text-[--color-accent] text-sm hover:underline"
           >
-            Email me to get started &rarr;
+            Get in touch to learn more &rarr;
           </a>
         </div>
       </FadeUp>
@@ -583,46 +583,59 @@ function Coaching() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Section 8 — Contact / Footer                                      */
+/*  Section 8 — Contact                                               */
 /* ------------------------------------------------------------------ */
 function Contact() {
   return (
-    <footer
+    <section
       id="contact"
-      className="bg-[#1D1D1F] text-white py-28 md:py-36"
+      className="py-28 md:py-36 border-t border-[--color-divider]"
     >
       <FadeUp>
         <div className="max-w-3xl mx-auto px-6">
-          <p className="text-xs uppercase tracking-widest text-white/50 mb-8">
+          <p className="text-xs uppercase tracking-widest text-[--color-muted] mb-8">
             Get In Touch
           </p>
-          <p className="text-base text-white/70 mb-8">
-            The best way to reach me is email. I try to respond to everyone.
-          </p>
-
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm">
-            <a
-              href="mailto:josh@joshsklar.com"
-              className="text-white hover:text-[--color-accent] transition-colors"
-            >
-              josh@joshsklar.com
-            </a>
-            <span className="hidden sm:inline text-white/30">&middot;</span>
-            <a
-              href="https://www.linkedin.com/in/jrmsklar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-[--color-accent] transition-colors"
-            >
-              LinkedIn
-            </a>
+          <div className="space-y-5 text-base leading-relaxed text-[--color-foreground] mb-8 max-w-2xl">
+            <p>
+              Send me a note. I read everything and try to respond to everyone.
+            </p>
           </div>
-
-          <div className="mt-20 pt-8 border-t border-white/10 text-xs text-white/30">
-            Josh Sklar &middot; New York, NY &middot; &copy; 2026
-          </div>
+          <iframe
+            src="https://airtable.com/embed/appD9G1Q8Jflxctbm/pagfa4VbwVpu1nNS3/form"
+            width="100%"
+            height={710}
+            title="Contact form"
+            className="airtable-embed rounded-md"
+            style={{ background: "transparent", border: "1px solid #ccc" }}
+          />
         </div>
       </FadeUp>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section 9 — Footer                                                */
+/* ------------------------------------------------------------------ */
+function Footer() {
+  return (
+    <footer className="bg-[#1D1D1F] text-white py-16 md:py-20">
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm">
+          <div className="text-white/50 text-xs">
+            Josh Sklar &middot; New York, NY &middot; &copy; 2026
+          </div>
+          <a
+            href="https://www.linkedin.com/in/jrmsklar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[--color-accent] transition-colors"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }
@@ -642,9 +655,9 @@ export default function HomePage() {
         <Testimonials />
         <Writing />
         <Coaching />
-
+        <Contact />
       </main>
-      <Contact />
+      <Footer />
     </>
   );
 }

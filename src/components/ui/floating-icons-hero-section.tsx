@@ -217,7 +217,7 @@ export function FloatingIconsHero() {
                   onClick={() => setShowToast(false)}
                   className="inline-flex items-center gap-1 rounded-full bg-neutral-800 text-white px-4 py-1.5 text-xs font-medium shadow-lg hover:bg-neutral-700 transition-colors whitespace-nowrap"
                 >
-                  Contact Josh &rarr;
+                  Get In Touch &rarr;
                 </a>
               </motion.div>
             )}
